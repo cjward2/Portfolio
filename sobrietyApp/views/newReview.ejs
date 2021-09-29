@@ -1,0 +1,132 @@
+<%- include('partials/header', {title: '| New Review'}) %> 
+
+
+<form action="/user/reviews" method="post">
+    <div class="form-group my-3">
+       <p class="lead">1. When we retire at night, we constructively review our day. Were we resentful?</p>
+        <div class="form-group">
+        <input class="form-check-input" type="radio" name="q1" id="q1" value="no" checked>
+        <label for="q1">No</label>
+        </div>
+        <input class="form-check-input" type="radio" name="q1" id="q1" value="yes">
+        <label for="q1">Yes</label>
+        </div>
+        <div class="form-group">
+        <textarea type="text" class="form-control mb-3" cols="30" rows="5" name="describe1" id="describe1" placeholder="Describe if needed..."></textarea>
+     </div>
+
+     <div class="form-group my-3">
+        <p class="lead">2. Were we selfish?</p>
+         <div class="form-group">
+         <input class="form-check-input" type="radio" name="q2" id="q2" value="no" checked>
+         <label for="q2">No</label>
+         </div>
+         <input class="form-check-input" type="radio" name="q2" id="q2" value="yes">
+         <label for="q2">Yes</label>
+         </div>
+         <div class="form-group">
+         <textarea type="text" class="form-control mb-3" cols="30" rows="5" name="describe2" id="describe2" placeholder="Describe if needed..."></textarea>
+      </div>
+
+      <div class="form-group my-3">
+        <p class="lead">3. Were we dishonest?</p>
+         <div class="form-group">
+         <input class="form-check-input" type="radio" name="q3" id="q3" value="no" checked>
+         <label for="q3">No</label>
+         </div>
+         <input class="form-check-input" type="radio" name="q3" id="q3" value="yes">
+         <label for="q3">Yes</label>
+         </div>
+         <div class="form-group">
+         <textarea type="text" class="form-control mb-3" cols="30" rows="5" name="describe3" id="describe3" placeholder="Describe if needed..."></textarea>
+      </div>
+
+      <div class="form-group my-3">
+        <p class="lead">4. Were we afraid?</p>
+         <div class="form-group">
+         <input class="form-check-input" type="radio" name="q4" id="q4" value="no" checked>
+         <label for="q4">No</label>
+         </div>
+         <input class="form-check-input" type="radio" name="q4" id="q4" value="yes">
+         <label for="q4">Yes</label>
+         </div>
+         <div class="form-group">
+         <textarea type="text" class="form-control mb-3" cols="30" rows="5" name="describe4" id="describe4" placeholder="Describe if needed..."></textarea>
+      </div>
+
+      <div class="form-group my-3">
+        <p class="lead">5. Do we owe an apology?</p>
+         <div class="form-group">
+         <input class="form-check-input" type="radio" name="q5" id="q5" value="no" checked>
+         <label for="q5">No</label>
+         </div>
+         <input class="form-check-input" type="radio" name="q5" id="q5" value="yes">
+         <label for="q5">Yes</label>
+         </div>
+         <div class="form-group">
+         <textarea type="text" class="form-control mb-3" cols="30" rows="5" name="describe5" id="describe5" placeholder="Describe if needed..."></textarea>
+      </div>
+
+      <div class="form-group my-3">
+        <p class="lead">6. Have we kept something to ourselves which should be discussed with another person at once?</p>
+         <div class="form-group">
+         <input class="form-check-input" type="radio" name="q6" id="q6" value="no" checked>
+         <label for="q6">No</label>
+         </div>
+         <input class="form-check-input" type="radio" name="q6" id="q6" value="yes">
+         <label for="q6">Yes</label>
+         </div>
+         <div class="form-group">
+         <textarea type="text" class="form-control mb-3" cols="30" rows="5" name="describe6" id="describe6" placeholder="Describe if needed..."></textarea>
+      </div>
+
+      <div class="form-group my-3">
+        <p class="lead">7. Were we kind and loving toward all?</p>
+         <div class="form-group">
+         <input class="form-check-input" type="radio" name="q7" id="q7" value="no" checked>
+         <label for="q7">No</label>
+         </div>
+         <input class="form-check-input" type="radio" name="q7" id="q7" value="yes">
+         <label for="q7">Yes</label>
+         </div>
+         <div class="form-group">
+         <textarea type="text" class="form-control mb-3" cols="30" rows="5" name="describe7" id="describe7" placeholder="Describe if needed..."></textarea>
+      </div>
+
+      <div class="form-group my-3">
+        <p class="lead">8. What could we have done better?</p>
+         <div class="form-group">
+         <textarea type="text" class="form-control mb-3" cols="30" rows="5" name="describe8" id="describe8" placeholder="Describe if needed..."></textarea>
+      </div>
+
+      <div class="form-group my-3">
+        <p class="lead">9. Were we thinking of ourselves most of the time?</p>
+         <div class="form-group">
+         <input class="form-check-input" type="radio" name="q9" id="q9" value="no" checked>
+         <label for="q9">No</label>
+         </div>
+         <input class="form-check-input" type="radio" name="q9" id="q9" value="yes">
+         <label for="q9">Yes</label>
+         </div>
+         <div class="form-group">
+         <textarea type="text" class="form-control mb-3" cols="30" rows="5" name="describe9" id="describe9" placeholder="Describe if needed..."></textarea>
+      </div>
+
+      <div class="form-group my-3">
+        <p class="lead">10. Or were we thinking of what we could do for others, of what we could pack into the stream of life?</p>
+         <div class="form-group">
+         <input class="form-check-input" type="radio" name="q10" id="q10" value="no" checked>
+         <label for="q10">No</label>
+         </div>
+         <input class="form-check-input" type="radio" name="q10" id="q10" value="yes">
+         <label for="q10">Yes</label>
+         </div>
+         <div class="form-group">
+         <textarea type="text" class="form-control mb-3" cols="30" rows="5" name="describe10" id="describe10" placeholder="Describe if needed..."></textarea>
+      </div>
+
+      <input type="submit" value="Save" class="btn btn-success">
+</form>
+
+
+<%- include('partials/footer') %> 

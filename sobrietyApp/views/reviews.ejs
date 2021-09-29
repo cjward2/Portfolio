@@ -1,0 +1,18 @@
+<%- include('partials/header', {title: "| Reviews"}) %> 
+
+<div class="text-center">
+    <h1 class="text-center mt-3">Nightly Reviews</h1>
+    <%- include('partials/messages') %>
+    <a href="/user/reviews/new" class="btn btn-success">New Review</a>
+    </div>
+
+    <% reviews.forEach(element => { %>
+        <div class="card my-3 mx-5">
+            <div class="card-body text-center">
+              <h5 class="card-title"><%= element.date.toDateString() %> </h5>
+              <a class="btn btn-info" href='/user/reviews/<%= element._id %>'>View Details</a>
+            </div>
+          </div>
+    <% }) %>
+
+<%- include('partials/footer') %> 
