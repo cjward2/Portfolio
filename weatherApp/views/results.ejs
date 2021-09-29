@@ -1,0 +1,83 @@
+<%- include('partials/header', {title: 'Results'}) %> 
+
+<!-- display city and state -->
+    <h1 id="search_city"><%= searchCity %>, <%= searchState %> </h1>
+
+    <!-- conditional logic to display time in civilian. Used substr to grab data I want from searchTime -->
+    <% if (searchTime.substr(11, 2) > 12) { %>
+        <h1 id="time"><%= `${searchTime.substr(11, 2) - 12}${searchTime.substr(13, 3)} PM` %> </h1>
+     <% } else if (searchTime.substr(11, 2) == 00) { %> 
+        <h1 id="time"><%= `12${searchTime.substr(13, 3)} AM` %> </h1>
+        <% } else if (searchTime.substr(11, 2) == 12) { %> 
+            <h1 id="time"><%= `12${searchTime.substr(13, 3)} PM` %> </h1>
+            <% } else if (searchTime.substr(11, 2) < 12) { %> 
+                <h1 id="time"><%= `${searchTime.substr(11, 2)}${searchTime.substr(13, 3)} AM` %> </h1>
+                <% } %>
+<div class="d-flex mt-5 justify-content-center">
+    <!-- cycle through data array -->
+    <% data.forEach(element => { %>
+        <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front bg-info">
+                  <!-- reaarange date to display month-day-year using substr and template literals -->
+                  <p id="date"><%= `${element.applicable_date.substr(5, 5)}-${element.applicable_date.substr(0, 4)}` %> </p>
+                  <!-- conditional logic to display certain icon depending on value of weather_state_name -->
+                <% if (element.weather_state_name === 'Clear') { %>
+                    <img src="https://www.metaweather.com/static/img/weather/c.svg" alt="Clear">
+                <% } else if (element.weather_state_name === 'Showers') {%>
+                    <img src="https://www.metaweather.com/static/img/weather/s.svg" alt="Showers">
+                 <% } else if (element.weather_state_name === 'Light Cloud') {%>
+                    <img src="https://www.metaweather.com/static/img/weather/lc.svg" alt="Light Cloud">
+                  <% } else if (element.weather_state_name === 'Heavy Cloud') {%>
+                    <img src="https://www.metaweather.com/static/img/weather/hc.svg" alt="Heavy Cloud">
+                 <% } else if (element.weather_state_name === 'Light Rain') {%>
+                    <img src="https://www.metaweather.com/static/img/weather/lr.svg" alt="Light Rain">
+                <% } else if (element.weather_state_name === 'Heavy Rain') {%>
+                     <img src="https://www.metaweather.com/static/img/weather/hr.svg" alt="Heavy Rain">
+                 <% } else if (element.weather_state_name === 'Thunderstorm') {%>
+                     <img src="https://www.metaweather.com/static/img/weather/t.svg" alt="Thunderstorm">
+                 <% } else if (element.weather_state_name === 'Hail') {%>
+                    <img src="https://www.metaweather.com/static/img/weather/h.svg" alt="Hail">
+                <% } else if (element.weather_state_name === 'Sleet') {%>
+                     <img src="https://www.metaweather.com/static/img/weather/sl.svg" alt="Sleet">
+                 <% } else if (element.weather_state_name === 'Snow') {%>
+                     <img src="https://www.metaweather.com/static/img/weather/sn.svg" alt="Snow">
+                 <% } %> 
+              </div>
+
+              <div class="flip-card-back">
+                  <!-- display value of weather state name -->
+                <p><%= element.weather_state_name %></p>
+                <!-- convert temp to farenheight, then display -->
+                 <p>Max: <%= (element.max_temp * 1.8 + 32).toFixed(0) %>&deg;F</p>
+                 <p>Min: <%= (element.min_temp * 1.8 + 32).toFixed(0) %>&deg;F</p>
+
+                 <p> 
+                     Wind:
+                     <!-- conditional logic to display certain arrow directions depending on current wind directions -->
+                     <% if (element.wind_direction_compass ==='SE' || element.wind_direction_compass ==='SSE' || element.wind_direction_compass ==='ESE') { %>
+                       <span class="wind_direction">&#8600;</span> 
+                     <% } else if (element.wind_direction_compass ==='NE' || element.wind_direction_compass ==='NNE' || element.wind_direction_compass ==='ENE') { %>
+                        <span class="wind_direction">&#8599;</span>
+                     <% } else if (element.wind_direction_compass ==='SW' || element.wind_direction_compass ==='SSW' || element.wind_direction_compass ==='WSW') { %>
+                         <span class="wind_direction">&#8601;</span>
+                    <% } else if (element.wind_direction_compass ==='NW' || element.wind_direction_compass ==='NNW' || element.wind_direction_compass ==='WNW') { %>
+                         <span class="wind_direction">&#8598;</span>
+                    <% } else if (element.wind_direction_compass ==='W') { %>
+                        <span class="wind_direction">&#8592;</span>
+                    <% } else if (element.wind_direction_compass ==='E') { %>
+                        <span class="wind_direction">&#8594;</span>
+                    <% } else if (element.wind_direction_compass ==='N') { %>
+                        <span class="wind_direction">&#8593;</span>
+                     <% } else if (element.wind_direction_compass ==='S') { %>
+                         <span class="wind_direction">&#8595;</span>
+                     <% } %> 
+                        <%= element.wind_speed.toFixed(0) %> mph 
+                    </p>
+              </div>
+            </div>
+          </div>
+    <% }) %>
+</div>
+
+<%- include('partials/footer') %> 

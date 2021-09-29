@@ -1,0 +1,21 @@
+<%- include('partials/header', {title: '| Inventory'}) %> 
+
+
+<div class="text-center">
+<h1 class="text-center mt-3">Inventory</h1>
+<%- include('partials/messages') %>
+<a href="/user/inventory/new" class="btn btn-success">Add Inventory</a>
+</div>
+
+<% inventories.forEach(element => { %>
+    <div class="card my-4">
+        <div class="card-body">
+          <h5 class="card-title"><%= element.who%> </h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%= element.why %></h6>
+          <p class="card-text"><%= element.myPart %></p>
+          <a class="btn btn-info" href='/user/inventory/<%= element._id %>'>View Details</a>
+        </div>
+      </div>
+<% }) %>
+
+<%- include('partials/footer') %> 

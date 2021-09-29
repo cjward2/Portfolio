@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+  }
+ 
+body {
+    background-image: url('/backgroundImage.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Roboto Slab', serif;
+}
+
+#city {
+    width: 60%;
+}
+
+.flip-card {
+    background-color: transparent;
+    display: inline-block;
+    width: 300px;
+    height: 200px;
+    border: 1px solid #f1f1f1;
+    perspective: 1000px; /* 3D effect */
+  }
+  
+  /* This container is needed to position the front and back side */
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  
+  /* Do an horizontal flip when you move the mouse over the flip box container */
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  /* Position the front and back side */
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  /* Style the front side */
+  .flip-card-front {
+    background-color: rgb(138, 208, 255);
+    color: black;
+  }
+
+  #date {
+    font-size: 16px;
+  }
+  
+  /* Style the back side */
+  .flip-card-back {
+    background-color: dodgerblue;
+    color: white;
+    font-size: 18px;
+    transform: rotateY(180deg);
+  }
+
+  img {
+    width:75%;
+    height:75%;
+  }
+
+  .wind_direction {
+      font-size: 18px;
+      border: none;
+  }
+
+  #search_city {
+      color: rgb(255, 255, 255);
+       text-align: center;
+  }
+
+  #time {
+      color: rgb(255, 255, 255);
+      text-align: center;
+  }
