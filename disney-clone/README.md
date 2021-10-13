@@ -1,7 +1,7 @@
 # Disney+ Clone
 - Disney+ Clone using React.js and Redux.
 
-[**Live Demo**](https://disney-clone-9cdd5.web.app/)
+You can find a live version of this build[**Here**](https://disney-clone-9cdd5.firebaseapp.com/)
 
 ![](./img/img1.jpg)
 ![](./img/img2.png)
