@@ -20,7 +20,7 @@ function App() {
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
-  const [mapCenter, setMapCenter] = useState({ lat: 0, lng: 0 });
+  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   const [mapZoom, setMapZoom] = useState(3);
   const [mapCountries, setMapCopuntries] = useState([]);
   const [casesType, setCasesType] = useState("cases");
@@ -71,7 +71,7 @@ function App() {
         setCountryInfo(data);
         console.log(countryCode);
         if(countryCode === "worldwide") {
-          setMapCenter({ lat: 0, lng: 0 }); 
+          setMapCenter({ lat: 34.80746, lng: -40.4796 }); 
         }
         setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
         setMapZoom(3);
