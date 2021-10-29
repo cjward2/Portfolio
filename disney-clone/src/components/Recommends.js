@@ -4,8 +4,10 @@ import { useSelector } from "react-redux";
 import { selectRecommend } from "../features/movie/movieSlice";
 
 const Recommends = (props) => {
+    //Bring in current State and assign to movies
     const movies = useSelector(selectRecommend);
 
+    //If movies exists(true) map over it and return movie info
     return (
         <Container>
           <h4>Recommended For You</h4>
@@ -14,6 +16,7 @@ const Recommends = (props) => {
               movies.map((movie, key) => (
                 <Wrap key={key}>
                   {movie.id}
+                  {/* build link to movie */}
                   <Link to={`/detail/` + movie.id}>
                     <img src={movie.cardImg} alt={movie.title} />
                   </Link>

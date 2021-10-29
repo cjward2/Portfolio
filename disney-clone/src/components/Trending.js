@@ -4,8 +4,10 @@ import { useSelector } from "react-redux";
 import { selectTrending } from "../features/movie/movieSlice";
 
 const Trending = (props) => {
+  //Bring in current state
   const movies = useSelector(selectTrending);
 
+  //Cycle through movies if it exists
   return (
     <Container>
       <h4>Trending</h4>
@@ -14,6 +16,7 @@ const Trending = (props) => {
           movies.map((movie, key) => (
             <Wrap key={key}>
               {movie.id}
+              {/* Build link to detal page */}
               <Link to={`/detail/` + movie.id}>
                 <img src={movie.cardImg} alt={movie.title} />
               </Link>

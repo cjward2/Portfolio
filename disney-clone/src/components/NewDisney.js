@@ -4,8 +4,10 @@ import { useSelector } from "react-redux";
 import { selectNewDisney } from "../features/movie/movieSlice";
 
 const NewDisney = (props) => {
+  //Bring in state from store
     const movies = useSelector(selectNewDisney);
   
+    //Map through state if it exists
     return (
       <Container>
         <h4>New to Disney+</h4>

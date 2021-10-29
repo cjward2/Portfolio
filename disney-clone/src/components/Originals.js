@@ -4,8 +4,10 @@ import { useSelector } from "react-redux";
 import { selectOriginal } from "../features/movie/movieSlice";
 
 const Originals = (props) => {
+  //Bring in current state
   const movies = useSelector(selectOriginal);
 
+  //Cycle through movies if it exists 
   return (
     <Container>
       <h4>Originals</h4>
@@ -14,6 +16,7 @@ const Originals = (props) => {
           movies.map((movie, key) => (
             <Wrap key={key}>
               {movie.id}
+              {/* Build link to detail page */}
               <Link to={`/detail/` + movie.id}>
                 <img src={movie.cardImg} alt={movie.title} />
               </Link>

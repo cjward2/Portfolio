@@ -15,6 +15,7 @@ import { selectUserName } from "../features/user/userSlice";
 const Home = (props) => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
+  //Initialize empty arrays to store movies based on type
   let recommends = [];
   let newDisneys = [];
   let originals = [];
@@ -22,6 +23,7 @@ const Home = (props) => {
 
   useEffect(() => {
     db.collection("movies").onSnapshot((snapshot) => {
+      //Pull data from firestore and add to new array based on switch statement case
       snapshot.docs.map((doc) => {
         switch (doc.data().type) {
           case "recommend":
@@ -42,6 +44,7 @@ const Home = (props) => {
         }
       });
 
+      //Update state in Store
       dispatch(
         setMovies({
           recommend: recommends,

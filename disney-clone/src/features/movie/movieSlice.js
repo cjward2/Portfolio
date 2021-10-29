@@ -8,7 +8,7 @@ const initialState = {
   trending: null,
 };
 
-
+//Create Slice with slice name, intial state, and reducers to automatically generate action creators and action types that correspond to reducers and state
 const movieSlice = createSlice({
   name: "movie",
   initialState,
@@ -22,8 +22,9 @@ const movieSlice = createSlice({
   },
 });
 
+//Set setMovies to movieSlice.actions
 export const { setMovies } = movieSlice.actions;
-
+//Export functions
 export const selectRecommend = (state) => state.movie.recommend;
 export const selectNewDisney = (state) => state.movie.newDisney;
 export const selectOriginal = (state) => state.movie.original;
