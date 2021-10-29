@@ -3,6 +3,7 @@ import { showDataOnMap } from "../util";
 import "./Map.css";
 
 const Map = ({ countries, casesType, center, zoom }) => {
+    //Show map component with center being lat and long passed down as center prop, and zoom as state passed as prop. 
     return (
         <div className="map">
             <LeafletMap center={ center } zoom={ zoom }>
@@ -10,6 +11,7 @@ const Map = ({ countries, casesType, center, zoom }) => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 />
+                {/* Call function from util.js */}
                 { showDataOnMap(countries, casesType) }
             </LeafletMap>
         </div>

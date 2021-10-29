@@ -12,8 +12,10 @@ const Header = (props) => {
     const userName = useSelector(selectUserName);
     const userPhoto = useSelector(selectUserPhoto);
 
+    //Runs when userName state changes.
     useEffect(() => {
       auth.onAuthStateChanged(async (user) => {
+        //If User is true, run SetUser and redirect to home page
         if (user) {
           setUser(user);
           history.push("/home");
@@ -22,6 +24,7 @@ const Header = (props) => {
     }, [userName]);
   
     const handleAuth = () => {
+      //If user is nopt signed in, run google auth via firebase
       if (!userName) {
         auth
           .signInWithPopup(provider)
@@ -31,6 +34,7 @@ const Header = (props) => {
           .catch((error) => {
             alert(error.message);
           });
+          //If user is signed in, sign them out and redirect to root route
       } else if (userName) {
         auth
           .signOut()
@@ -41,7 +45,8 @@ const Header = (props) => {
           .catch((err) => alert(err.message));
       }
     };
-  
+    
+    //Update redux store with users name, email, and google photo
     const setUser = (user) => {
       dispatch(
         setUserLoginDetails({
@@ -57,8 +62,8 @@ const Header = (props) => {
            <Logo>
              <img src="/images/logo.svg" alt="Disney+" />
             </Logo>
-
-          { !userName ? (<UserLogin onClick={handleAuth}>Login</UserLogin>) : 
+        {/* If user is not signed in, Only display login button, else display full nav bar */}
+        { !userName ? (<UserLogin onClick={handleAuth}>Login</UserLogin>) : 
            (<>
            
             <NavMenu>

@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+//Setting initial state
 const initialState = {
   recommend: null,
   newDisney: null,
   original: null,
   trending: null,
 };
+
 
 const movieSlice = createSlice({
   name: "movie",

@@ -2,6 +2,7 @@ import React from "react";
 import numeral from "numeral";
 import { Circle, Popup } from "react-leaflet";
 
+//Defining circle color and multiplier to be shown on map
 const casesTypeColors = {
   cases: {
     hex: "#CC1034",
@@ -17,14 +18,17 @@ const casesTypeColors = {
   },
 };
 
+//Function to Sort data being shown in table
 export const sortData = data => {
     let sortedData = [...data];
     return sortedData.sort((a, b) => b.cases - a.cases);
   };
 
+  //Function to format stats being sent to InfoBox
   export const prettyPrintStat = (stat) =>
   stat ? `+${numeral(stat).format("0.0a")}` : "+0";
 
+  //Function to set circles on Map
   export const showDataOnMap = (data, casesType='cases') => {
     return data.map(country => (
       <Circle

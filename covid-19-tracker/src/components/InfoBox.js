@@ -3,6 +3,8 @@ import "./InfoBox.css"
 
 const InfoBox = ({ title, cases, active, isRed, total, ...props }) => {
   return (
+    //Onclick set casesType to info box clicked(cases, recovered, or deaths).
+    //Set CSS using boolean values.
     <Card onClick={ props.onClick } className={ `infoBox ${active && 'infoBox--selected'} ${isRed && 'infoBox--red'}` }>
       <CardContent>
         <Typography className="infoBox__title" color="textSecondary">

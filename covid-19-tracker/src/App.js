@@ -25,26 +25,33 @@ function App() {
   const [mapCountries, setMapCopuntries] = useState([]);
   const [casesType, setCasesType] = useState("cases");
 
+  //Run api calls on intial render
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
       .then((response) => response.json())
       .then((data) => {
+        //Set state with data recieved
         setCountryInfo(data);
       })
       .catch((err) => console.log(err));
   }, []);
+
 
   useEffect(() => {
     const getCountriesData = () => {
       fetch("https://disease.sh/v3/covid-19/countries")
         .then((response) => response.json())
         .then((data) => {
+          //cycle through data coming back to get country name and country abbreviation.
           const countries = data.map((country) => ({
             name: country.country,
             value: country.countryInfo.iso2,
           }));
+          //Sort data recieved using sortData function from util.js
           const sortedData = sortData(data);
+          //Set state with sorted data so Table is organized
           setTableData(sortedData);
+          //Set state to be passed down to map component
           setMapCopuntries(data);
           setCountries(countries);
         })
@@ -56,7 +63,9 @@ function App() {
     
   }, []);
 
+  
   const onCountryChange = (event) => {
+    //Set countryCode variable to event.target.value and use to build endpoint
     const countryCode = event.target.value;
 
     const url =
@@ -67,12 +76,15 @@ function App() {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
+        //Set state
         setCountry(countryCode);
         setCountryInfo(data);
         console.log(countryCode);
+        //If worldwide is clicked move map back to this lat and long
         if(countryCode === "worldwide") {
           setMapCenter({ lat: 34.80746, lng: -40.4796 }); 
         }
+        //Otherwise move map to country lat and long
         setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
         setMapZoom(3);
       })
@@ -91,6 +103,7 @@ function App() {
               onChange={onCountryChange}
             >
               <MenuItem value="worldwide">Worldwide</MenuItem>
+              {/* Cycle through countries to build menu List */}
               {countries.map((country, index) => (
                 <MenuItem key={index} value={country.value}>
                   {country.name}
