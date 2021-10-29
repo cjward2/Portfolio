@@ -3,7 +3,7 @@
 
 You can find a live version of this build [**Here**](https://disney-clone-9cdd5.web.app/)
 
-![](./img/img1.jpg)
+![](./img/img1.png)
 ![](./img/img2.png)
 ![](./img/img3.png)
 ![](./img/img4.png)
