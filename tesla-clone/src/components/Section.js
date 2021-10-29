@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Fade from "react-reveal/Fade";
 
+//Destructure props
 const Section = ({
   title,
   description,

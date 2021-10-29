@@ -7,7 +7,9 @@ import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 
 const Header = () => {
+    //Set state for side Menu
     const [burgerStatus, setBurgerStatus] =  useState(false);
+    //Bring in Cars state from store
     const cars = useSelector(selectCars);
 
     return (
@@ -17,6 +19,7 @@ const Header = () => {
                 <img src="/images/logo.svg" alt="Tesla Logo" />
             </Link>
             <Menu>
+                {/* If cars exists, map through it */}
                 { cars && cars.map((car, index) =>(
                     <Link to={`/detail/${index}`} key={ index } href="#">{ car }</Link>
                ))}
@@ -24,12 +27,15 @@ const Header = () => {
             <RightMenu>
                 <a href="#">Shop</a>
                 <a href="#">Account</a>
+                {/* Onclick, set state to true, which with CSS opens menu */}
                 <CustomMenu onClick={() => setBurgerStatus(true)}></CustomMenu>
             </RightMenu>
             <BurgerNav show={ burgerStatus }>
                 <CloseWrapper>
+                    {/* Onclick, set state to false, which with CSS closes menu */}
                     <CustomClose onClick={ ()=> setBurgerStatus(false) } />
                 </CloseWrapper>
+                {/* Show cars in siude menu */}
                 { cars && cars.map((car, index) =>(
                     <li key={ index }><Link to={`/detail/${index}`}>{ car }</Link></li>
                ))}
@@ -109,6 +115,7 @@ const BurgerNav = styled.div`
     flex-direction: column;
     justify-content: start;
     text-align: start;
+    // passed down props to styled component to open or close nav menu
     transform: ${props => props.show ? `translateX(0)` : `translateX(100%)`};
     transition: transform 0.2s;
 

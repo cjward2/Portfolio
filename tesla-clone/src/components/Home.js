@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Section from "./Section";
 
 const Home = () => {
+  // Building home page with mupltiple section components passing down varying props
   return (
     <Container>
       <Section

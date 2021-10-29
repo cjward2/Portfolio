@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Fade from "react-reveal/Fade";
 
 const Detail = () => {
+  //Hardcoded car data
     const carData = [
         {
             "id": 0,
@@ -46,10 +47,11 @@ const Detail = () => {
         }
     ]
 
-
+    //Pull id using route params
     const { id } = useParams();
     console.log(id);
 
+    //Set attributes dynamically depening on id param
     return (
         <Wrap bgImage={carData[id].image}>
         <Fade botttom>
