@@ -4,6 +4,7 @@ import { selectUser } from '../features/userSlice';
 import { loadStripe } from '@stripe/stripe-js';
 import ClipLoader from "react-spinners/ClipLoader";
 import db from '../firebase';
+import { stripe_key } from '../config';
 import './PlansScreen.css';
 
 const PlansScreen = () => {
@@ -78,7 +79,7 @@ const PlansScreen = () => {
                 //We have a session, lets redirect to checkout
                 //Init Stripe
 
-                const stripe = await loadStripe('pk_test_51JvkJKA3mIAiVX25nnbDVkMPOiXf66sOl5YmNyspKsHWUWAVPxrIU5a4ySCDxDQdYhmMqH4wUlRnmfY36rt5RkWx00pzfxtkLf');
+                const stripe = await loadStripe(stripe_key);
 
                 stripe.redirectToCheckout({ sessionId });
             }
