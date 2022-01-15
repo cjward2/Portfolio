@@ -1,0 +1,26 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; 
+}
+
+html {
+  /* set font-size in html tag and use rem elsewhere as reference to this. Makes media quuries easy. Set as percentage so user can chnnage default font sizew of they wish */
+  font-size: 62.5%;
+}
+
+body {
+  /* best practice, but doesn't make huge difference */
+  box-sizing: border-box; 
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /* font-size: 16px; */
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem; 
+}

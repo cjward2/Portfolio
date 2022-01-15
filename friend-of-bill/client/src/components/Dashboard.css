@@ -1,0 +1,39 @@
+.dashboard {
+    border: 2px solid red;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard__welcome-message {
+    border: 2px solid red;
+    text-align: center;
+    font-size: 3rem;
+    padding: 15px 0;
+    margin-bottom: 35px;
+}
+
+.dashboard__soberStats-container {
+    border: 2px solid red;
+    font-size: 1.8rem;
+    text-align: center;
+    padding: 20px 10px;
+    display: inline-block;
+    width: auto;
+    margin: 0 auto;
+    color: #000;
+}
+
+.dashboard__enter-date-text {
+    text-align: center;
+    font-size: 1.8rem
+}
+
+.dashboard__form-control {
+    border: 2px solid red;
+    text-align: center;
+}
+
+.dashboard__sober-input {
+    width: 33.33%;
+}

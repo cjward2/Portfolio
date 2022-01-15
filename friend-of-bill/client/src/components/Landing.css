@@ -1,0 +1,17 @@
+.landing {
+    height: 100vh;
+    border: red 1 px solid;
+    background-color: orangered;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+}
+
+.landing__button-group {
+    text-align: center;
+}
+
+.landing__button-group--login {
+    margin-right: 50px;
+}
