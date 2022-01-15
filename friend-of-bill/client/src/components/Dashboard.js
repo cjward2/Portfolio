@@ -141,6 +141,7 @@ const Dashboard = () => {
                     { dailyReflection.paragraph1 && (
                         <>
                         <h1>{ dailyReflection.title }</h1>
+                        {/* There is parts of the text from paragraph1 that I dont want like the disclaimer */}
                         <h4>{ dailyReflection.paragraph1.substr(0, dailyReflection.paragraph1.length - 390) }</h4>
                         <h3>{ dailyReflection.pageNumber }</h3>
                         <h2>{ dailyReflection.paragraph2 }</h2>

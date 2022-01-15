@@ -5,6 +5,8 @@ import { logout, login, selectUser } from "../features/userSlice";
 import { useHistory } from "react-router-dom";
 import "./NightlyReview.css";
 
+import NightlyReviewForm from './NightlyReviewForm';
+
 const NightlyReview = () => {
     const [reviews, setReviews] = useState([]);
 
@@ -39,8 +41,10 @@ const NightlyReview = () => {
   return (
     <div className="nightlyReview">
       <h1>Nightly Review</h1>
+      <NightlyReviewForm />
     </div>
   );
 };
+
 
 export default NightlyReview;
