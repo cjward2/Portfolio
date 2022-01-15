@@ -17,6 +17,7 @@ const Dashboard = () => {
     const [soberDate, setSoberDate] = useState(false);
     const [formData, setFormData] = useState({ soberDate: '' });
     const [dailyReflection, setDailyReflection] = useState(dailyReflectionInitialState);
+    const [editSoberDate, setEditSoberDate] = useState(false);
 
     //Bring in user info from store
     const user = useSelector(selectUser);
@@ -42,8 +43,8 @@ const Dashboard = () => {
             }
            return res.json()
         }).then(data => {
-            setSoberDate(new Date(data.soberDate[0].date).toUTCString().substr(0, 16));
-            
+            //Set soberdate state to whatever the latest soberdate to be enetered was. No need to show user older ones and mkae them feel remorse
+            setSoberDate(new Date(data.soberDate[data.soberDate.length - 1].date).toUTCString().substr(0, 16));
         }).catch(err => {
             //this is where I will display message to user
             console.log(err)
@@ -67,9 +68,35 @@ const Dashboard = () => {
         })
     }, []);
 
+    const handleSubmit = event => {
+        event.preventDefault(); //Prevent submissions of form from refreshing page
+        fetch(`/api/soberdate`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ user, formData })
+        }).then(res => {
+            if(!res.ok) {
+                throw new Error('Error getting endpoint');
+            }
+            return res.json();
+        }).then(data => {
+            console.log(data)
+            setSoberDate(new Date(data.soberDate.date).toUTCString().substr(0, 16));
+            setEditSoberDate(false);
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
     const handleChange = event => {
         setFormData({ soberDate: event.target.value })
         console.log(formData);
+    }
+
+    const handleEditClick = () => {
+        setEditSoberDate(true);
     }
 
     let dateDifference = new Date().getTime() - new Date(soberDate).getTime();
@@ -80,10 +107,10 @@ const Dashboard = () => {
         return (
             <div className="dashboard">
                 <h1 className="dashboard__welcome-message">Welcome { user.name }!</h1>
-                { !soberDate ? (
+                { !soberDate || editSoberDate ? (
                     <>
                     <h3 className="dashboard__enter-date-text">Enter your Sobriety Date here:</h3>
-                    <form className="dashboard__form-control">
+                    <form className="dashboard__form-control" onSubmit={ handleSubmit }>
                     <input className="dashboard__sober-input" type="date" name="soberDate" id="soberDate" onChange={ handleChange }/>
                     <button className="dashboard__form-submit btn">Submit</button>
                     </form>
@@ -105,14 +132,21 @@ const Dashboard = () => {
                     <div className="soberStats__sober-hours">
                         Hours: { hours }
                     </div>
+                    <button className="dashboard__edit-btn btn" onClick={ handleEditClick }>Edit</button>
                 </div>
                 )}
 
                 <div className="dashboard__daily-reflection-container">
-                    <h1>{ dailyReflection.title }</h1>
-                    <h4>{ dailyReflection.paragraph1.substr(0, dailyReflection.paragraph1.length - 390) }</h4>
-                    <h3>{ dailyReflection.pageNumber }</h3>
-                    <h2>{ dailyReflection.paragraph2 }</h2>
+                    {/* I only want to display a daily reviews if they are actually coming back from backend. Im too reliant on a third paty website to potentially not send anything and break the app if this check isnt present */}
+                    { dailyReflection.paragraph1 && (
+                        <>
+                        <h1>{ dailyReflection.title }</h1>
+                        <h4>{ dailyReflection.paragraph1.substr(0, dailyReflection.paragraph1.length - 390) }</h4>
+                        <h3>{ dailyReflection.pageNumber }</h3>
+                        <h2>{ dailyReflection.paragraph2 }</h2>
+                        </>
+                    ) }
+                    
                 </div>
                 
             </div>

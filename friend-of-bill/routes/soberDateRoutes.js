@@ -44,4 +44,18 @@ router.get('/api/soberdate/:id', (req, res) => {
   })
 });
 
+router.post('/api/soberdate', (req, res) => {
+    const { user, formData } = req.body;
+    let newSoberDate = new SoberDate({
+      id: user.id,
+      date: formData.soberDate
+    });
+    newSoberDate.save()
+    .then(soberDate => {
+      res.json({ soberDate });
+    }).catch(err => {
+      res.status(400).json({ msg: 'Error saving Sober Date', err: true });
+    })
+});
+
 module.exports = router;
