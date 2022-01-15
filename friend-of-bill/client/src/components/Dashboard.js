@@ -15,6 +15,7 @@ const Dashboard = () => {
     }
 
     const [soberDate, setSoberDate] = useState(false);
+    const [formData, setFormData] = useState({ soberDate: '' });
     const [dailyReflection, setDailyReflection] = useState(dailyReflectionInitialState);
 
     //Bring in user info from store
@@ -34,23 +35,27 @@ const Dashboard = () => {
 
     //Run use Effect when component mounts
     useEffect(() => {
-        fetch('/api/soberdate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        })
+        fetch(`/api/soberdate/${user.id}`)
         .then(res => {
             if(!res.ok) {
-                throw new Error(`Error making fetch`);
+                throw new Error(`Error getting soberdate endpoint`)
+            }
+           return res.json()
+        }).then(data => {
+            setSoberDate(new Date(data.soberDate[0].date).toUTCString().substr(0, 16));
+            
+        }).catch(err => {
+            //this is where I will display message to user
+            console.log(err)
+        })
+
+        fetch('/api/dailyReflection')
+        .then(res => {
+            if(!res.ok) {
+                throw new Error(`Error getting endpoint`)
             }
             return res.json();
         }).then(data => {
-            console.log(data);
-            console.log(data.soberDate[0]);
-            console.log(new Date(data.soberDate[0].date).toUTCString());
-            setSoberDate(new Date(data.soberDate[0].date).toUTCString().substr(0, 16));
             setDailyReflection({ 
                 title: data.dailyReflectionTitle,
                 pageNumber: data.dailyReflectionPageNumber,
@@ -58,10 +63,14 @@ const Dashboard = () => {
                 paragraph2: data.dailyReflectionP2
              });
         }).catch(err => {
-            //this is where I will display message to user
-            console.log('Error block' , err); 
-        });
+            console.log(err);
+        })
     }, []);
+
+    const handleChange = event => {
+        setFormData({ soberDate: event.target.value })
+        console.log(formData);
+    }
 
     let dateDifference = new Date().getTime() - new Date(soberDate).getTime();
     let days = Math.floor(dateDifference/(1000 * 3600 * 24));
@@ -75,7 +84,7 @@ const Dashboard = () => {
                     <>
                     <h3 className="dashboard__enter-date-text">Enter your Sobriety Date here:</h3>
                     <form className="dashboard__form-control">
-                    <input className="dashboard__sober-input" type="date" name="soberDate" id="soberDate" />
+                    <input className="dashboard__sober-input" type="date" name="soberDate" id="soberDate" onChange={ handleChange }/>
                     <button className="dashboard__form-submit btn">Submit</button>
                     </form>
                     </>
@@ -103,7 +112,7 @@ const Dashboard = () => {
                     <h1>{ dailyReflection.title }</h1>
                     <h4>{ dailyReflection.paragraph1.substr(0, dailyReflection.paragraph1.length - 390) }</h4>
                     <h3>{ dailyReflection.pageNumber }</h3>
-                    <h2>{ dailyReflection.paragraph2.substr(0, dailyReflection.paragraph2.length - 390) }</h2>
+                    <h2>{ dailyReflection.paragraph2 }</h2>
                 </div>
                 
             </div>

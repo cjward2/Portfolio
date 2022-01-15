@@ -21,13 +21,7 @@ const Inventory = () => {
   }
 
   useEffect(() => {
-    fetch("/api/inventory", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
+    fetch(`/api/inventories/${user.id}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Error making fetch`);
@@ -36,7 +30,7 @@ const Inventory = () => {
       })
       .then((data) => {
         console.log(data);
-        dispatch(setInventory(data.inventory.reverse()));
+        dispatch(setInventory(data.inventory.reverse())); //Set inventory state in store in reverse order so most recent inventory will be at top for user
       })
       .catch((err) => {
         //this is where I will display message to user
@@ -44,7 +38,26 @@ const Inventory = () => {
       });
   }, []);
 
-  console.log(inventory)
+  const handleDelete = id => {
+    console.log(id);
+    fetch(`/api/inventory/${id}`, {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(user)
+    }).then(res => {
+      if(!res.ok) {
+        throw new Error(`Error getting delte inventory endpoint`)
+      }
+      return res.json();
+    }).then(data => {
+      console.log(data);
+      dispatch(setInventory(data.inventory.reverse())); //Set inventory state in store in reverse order so most recent inventory will be at top for user
+    }).catch(err => {
+      console.log(err)
+    })
+  }
 
   return (
     <div className="inventory">
@@ -55,6 +68,7 @@ const Inventory = () => {
           <div className="inventory__why">Why: {el.why}</div>
           <div className="inventory__why">My Part: {el.myPart}</div>
           <Link to={`/inventory/${el._id}`}>View Details</Link>
+          <button onClick={ () => handleDelete(el._id) } className="inventory__delete-btn">Delete</button>
         </div>
       ))}
     </div>
