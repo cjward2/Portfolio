@@ -2,13 +2,14 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, login, selectUser } from "../features/userSlice";
+import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import "./NightlyReview.css";
-
-import NightlyReviewForm from './NightlyReviewForm';
+import NightlyReviewForm from "./NightlyReviewForm";
 
 const NightlyReview = () => {
     const [reviews, setReviews] = useState([]);
+    const [addNewReview, setAddNewReview] = useState(false);
 
   //Bring in user info from store
   const user = useSelector(selectUser);
@@ -30,7 +31,7 @@ const NightlyReview = () => {
       })
       .then((data) => {
         console.log(data.review);
-        setReviews(data.review);
+        setReviews(data.review.reverse());
       })
       .catch((err) => {
         //this is where I will display message to user
@@ -38,10 +39,18 @@ const NightlyReview = () => {
       });
   }, []);
 
+  console.log(reviews);
+
   return (
     <div className="nightlyReview">
-      <h1>Nightly Review</h1>
-      <NightlyReviewForm />
+      <h1>Nightly Reviews</h1>
+      <Link className="new-review-link" to="/reviews/new">New Review</Link>
+      { reviews.map(el => (
+            <div className="nightlyReview__card" key={ el._id }>
+              { new Date(el.date).toLocaleDateString() }
+              <Link to={`/reviews/${el._id}`}>View Details</Link>
+            </div>
+        ))}
     </div>
   );
 };

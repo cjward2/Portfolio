@@ -10,6 +10,8 @@ import Inventory from "./components/Inventory";
 import Navbar from './components/Navbar';
 import NightlyReview from "./components/NightlyReview";
 import InventoryDetail from "./components/InventoryDetail";
+import NightlyReviewForm from "./components/NightlyReviewForm";
+import NightlyReviewDetail from "./components/NightlyReviewDetail";
 import "./App.css";
 
 function App() {
@@ -38,9 +40,16 @@ function App() {
       <Route exact path="/inventory/:id">
         <InventoryDetail />
       </Route>
-      <Route path="/reviews">
+      <Route exact path="/reviews">
         <NightlyReview />
       </Route>
+      <Route path="/reviews/:id">
+        <NightlyReviewDetail />
+      </Route>
+      <Route path="/reviews/new">
+        <NightlyReviewForm />
+      </Route>
+      
     </Router>
   );
 }

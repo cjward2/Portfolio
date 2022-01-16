@@ -20,14 +20,15 @@ request('https://aa.org/pages/en_US/daily-reflection', (error, response, html) =
      dailyReflectionTitle = $('article.node.node--type-daily-reflection.node--view-mode-teaser-2 > h3').text();
      dailyReflectionP1 = $('.clearfix.text-formatted.field.field--name-body.field--type-text-with-summary.field--label-hidden.field__item > p:first-child').text();
      dailyReflectionPageNumber = $('.clearfix.text-formatted.field.field--name-body.field--type-text-with-summary.field--label-hidden.field__item > p:nth-child(2)').text();
-     dailyReflectionP2 = $('.clearfix.text-formatted.field.field--name-body.field--type-text-with-summary.field--label-hidden.field__item > p:nth-child(3)').text();
+     dailyReflectionP2 = $('.clearfix.text-formatted.field.field--name-body.field--type-text-with-summary.field--label-hidden.field__item > p:nth-child(4)').text();
     } else {
         console.log(error);
     }
 });
 
 router.get('/api/dailyReflection', (req, res) => {
-    res.json({ dailyReflectionTitle, dailyReflectionP1, dailyReflectionPageNumber, dailyReflectionP2 })
+    res.json({ dailyReflectionTitle, dailyReflectionP1, dailyReflectionPageNumber, dailyReflectionP2 });
+    console.log(dailyReflectionP2);
 });
 
 router.get('/api/soberdate/:id', (req, res) => {
