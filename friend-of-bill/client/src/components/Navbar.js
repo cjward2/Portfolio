@@ -1,11 +1,28 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { logout, login, selectUser } from "../features/userSlice";
+import { useDispatch, useSelector } from 'react-redux';
+import { setMsg, selectMessage } from '../features/messageSlice';
+import { useHistory } from 'react-router-dom';
+
 import './Navbar.css';
 
 const Navbar = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
 
     const handleClick = () => {
         document.querySelector('input#navi-toggle').checked = false;
+    }
+
+    const handleLogout = () => {
+        window.sessionStorage.removeItem('userID');  //Since i am storing state in session storage I need to make sure to remove those before logging out.
+        window.sessionStorage.removeItem('name');
+        dispatch(setMsg({ msg: 'You have been logged out', err: false }));  //Set message state in store to display upon redirect
+        dispatch(logout()); //Dispatch logout action to store
+        history.push('/login');  //redirect user back to login
+        
     }
 
     return (
@@ -24,6 +41,7 @@ const Navbar = () => {
                     <li className="navigation__item"><Link onClick={ handleClick } to="/reviews" className="navigation__link"><span>03</span>Nightly Reviews</Link></li>
                     <li className="navigation__item"><Link onClick={ handleClick } to="/awakening" className="navigation__link"><span>04</span>Upon Awakening</Link></li>
                     <li className="navigation__item"><Link onClick={ handleClick } to="/login" className="navigation__link"><span>05</span>ChatRoom</Link></li>
+                    <li className="navigation__item navigation__link"><Link onClick={ handleLogout } to="#" className="navigation__link"><span>06</span>Logout</Link></li>
                 </ul>
             </nav>
         </div>

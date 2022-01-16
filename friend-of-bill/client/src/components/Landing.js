@@ -4,10 +4,15 @@ import './Landing.css';
 const Landing = () => {
     return (
         <div className="landing">
+            <div className="header__text-box">
+                <h1 className="heading-primary">
+                    <span className="heading-primary--main">Welcome Friend of Bill</span>
+                    <span class="heading-primary--sub">You don't have to suffer anymore</span>
+                </h1>
+                </div>
             <div className="landing__button-group">
-                <h1 className="landing__heading-primary">Welcome Friend of Bill</h1>
-                <a className="landing__button-group--login" href="/login">Login</a>
-                <a className="landing__button-group--register" href="/register">Register</a>
+                <a className="landing__btn btn--white btn--animated" href="/login">Login</a>
+                <a className="landing__btn btn--white btn--animated" href="/register">Register</a>
             </div>
             
         </div>

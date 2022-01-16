@@ -22,7 +22,7 @@ function App() {
   return (
     <Router>
       {/* Only show nav bar when user is logged in */}
-      { user.id !== undefined && <Navbar /> }
+      { user.id !== undefined  && <Navbar /> }
       <Route exact path="/">
         <Landing />
       </Route>

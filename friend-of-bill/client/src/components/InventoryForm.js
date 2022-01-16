@@ -273,21 +273,10 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
           </label>
         </div>
         <div className="inventory__form-group">
-          <textarea
-            type="text"
-            className="inventory__form-input"
-            cols="30"
-            rows="10"
-            placeholder="Where have I been selfish, dishonest, or afraid?"
-            name="myPart"
-            id="myPart"
-            autoComplete="off"
-            onChange={handleChange}
-            value={formData.myPart}
-          />
-          <label htmlFor="myPart" className="inventory__form-label">
-            Where have I been selfish, dishonest, or afraid?
-          </label>
+          <div className="form-floating">
+          <textarea className="form-control" placeholder="Where have I been selfish, dishonest, or afraid?" id="myPart" name="myPart" style={{'height':'125px'}} onChange={ handleChange }></textarea>
+          <label htmlFor="myPart">Where have I been selfish, dishonest, or afraid?</label>
+          </div>
         </div>
         <div className="inventory__form-group">
           <button type="submit" className="btn btn--green">
