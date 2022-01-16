@@ -74,11 +74,12 @@ router.delete('/api/inventory/:id', (req, res) => {
     .then(inventory => {
       Inventory.find({ id: req.body.id }) //If inventory is found, send back inventories to update state on front end
       .then(inventory => {
-        console.log(inventory);
         res.json({ inventory });
+      }).catch(() => {
+        res.status(400).json({ msg: 'Error finding all Inventories in delet route', err: true });
       })
     }).catch(err => {
-      console.log(err);
+      res.status(400).json({ msg: 'Error deleting Inventory', err: true });
     })
   });
 

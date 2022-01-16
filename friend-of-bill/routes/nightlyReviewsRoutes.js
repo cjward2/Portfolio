@@ -55,5 +55,19 @@ router.get('/api/reviews/:id', (req, res) => {
     })
  });
 
+ router.delete('/api/reviews/:id', (req, res) => {
+    Review.deleteOne({ _id: req.params.id })  //Find review to delete with req.params
+    .then(review => {
+      Review.find({ id: req.body.id }) //If review is found, send back inventories to update state on front end
+      .then(reviews => {
+        res.json({ reviews });  //Send reviews to update state on front end
+      }).catch(() => {
+        res.status(400).json({ msg: 'Error on backend finding all reviews', err: true });
+      })
+    }).catch(err => {
+      console.log(err);
+    })
+ });
+
 
 module.exports = router;

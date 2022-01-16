@@ -30,6 +30,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
 //Setup to read data from body
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
@@ -40,17 +42,6 @@ app.use('/', require('./routes/soberDateRoutes'));
 app.use('/', require('./routes/inventoryRoutes'));
 app.use('/', require('./routes/nightlyReviewsRoutes'));
 
-// const Review = require('./models/reviews');
-
-// app.get('/api/reviews/:id', (req, res) => {
-//   Review.find({ id: req.params.id })
-//   .then(review => {
-//     res.json({ review });
-//   }).catch(err => {
-//     console.log(err);
-//     res.status(400).json({ msg: 'Error getting review from database', err: true });
-//   })
-// });
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

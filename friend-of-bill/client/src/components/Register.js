@@ -1,5 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setMsg, selectMessage } from '../features/messageSlice';
+
 import './Register.css';
 
 const Register = () => {
@@ -11,6 +15,10 @@ const Register = () => {
     };
 
     const [formData, setFormData] = useState(initialState);
+
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const message = useSelector(selectMessage);
 
     const handleSubmit = event => {
         console.log('submit');
@@ -29,7 +37,9 @@ const Register = () => {
             }
             return res.json();
         }).then(data => {
-            console.log(data)
+            console.log(data);
+            dispatch(setMsg({ msg: 'You are registered and can now login', err: false }))
+            history.push('/login');
         }).catch(err => {
             console.log('Error block' , err);
             //this is where I will display message to user
@@ -66,8 +76,9 @@ const Register = () => {
                 <label htmlFor="password2" className="register__form-label">Confirm Password</label>
             </div>
             <div className="register__form-group">
-                <button type="submit" className="btn btn--green">Login</button>
+                <button type="submit" className="btn btn--green">Register</button>
             </div>
+            Already have an account? Login <Link to="/login">here</Link>
             </form>
         </div>
     )

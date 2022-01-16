@@ -39,7 +39,24 @@ const NightlyReview = () => {
       });
   }, []);
 
-  console.log(reviews);
+ const handleDelete = id => {
+   fetch(`/api/reviews/${id}`, {
+     method: "DELETE",
+     headers: {
+       "Content-Type": "application/json"
+     },
+     body: JSON.stringify(user)
+   }).then(res => {
+     if(!res.ok) {
+       throw new Error(`Error getting delete endpoint`)
+     }
+     return res.json();
+   }).then(data => {
+    setReviews(data.reviews.reverse());
+   }).catch(err => {
+     console.log(err);
+   })
+ }
 
   return (
     <div className="nightlyReview">
@@ -48,7 +65,8 @@ const NightlyReview = () => {
       { reviews.map(el => (
             <div className="nightlyReview__card" key={ el._id }>
               { new Date(el.date).toLocaleDateString() }
-              <Link to={`/reviews/${el._id}`}>View Details</Link>
+              <Link to={`/review/${el._id}`}>View Details</Link>
+              <button onClick={() => handleDelete(el._id) }>Delete</button>
             </div>
         ))}
     </div>

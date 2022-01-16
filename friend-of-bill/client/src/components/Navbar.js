@@ -22,7 +22,7 @@ const Navbar = () => {
                     <li className="navigation__item"><Link onClick={ handleClick } to="/dashboard" className="navigation__link"><span>01</span>Home</Link></li>
                     <li className="navigation__item"><Link onClick={ handleClick } to="/inventory" className="navigation__link"><span>02</span>Inventory</Link></li>
                     <li className="navigation__item"><Link onClick={ handleClick } to="/reviews" className="navigation__link"><span>03</span>Nightly Reviews</Link></li>
-                    <li className="navigation__item"><Link onClick={ handleClick } to="/login" className="navigation__link"><span>04</span>Upon Awakening</Link></li>
+                    <li className="navigation__item"><Link onClick={ handleClick } to="/awakening" className="navigation__link"><span>04</span>Upon Awakening</Link></li>
                     <li className="navigation__item"><Link onClick={ handleClick } to="/login" className="navigation__link"><span>05</span>ChatRoom</Link></li>
                 </ul>
             </nav>

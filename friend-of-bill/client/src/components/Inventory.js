@@ -20,6 +20,8 @@ const Inventory = () => {
     history.push("/login");
   }
 
+  const [showForm, setShowForm] = useState(false);
+
   useEffect(() => {
     fetch(`/api/inventories/${user.id}`)
       .then((res) => {
@@ -48,11 +50,10 @@ const Inventory = () => {
       body: JSON.stringify(user)
     }).then(res => {
       if(!res.ok) {
-        throw new Error(`Error getting delte inventory endpoint`)
+        throw new Error(`Error getting delete inventory endpoint`)
       }
       return res.json();
     }).then(data => {
-      console.log(data);
       dispatch(setInventory(data.inventory.reverse())); //Set inventory state in store in reverse order so most recent inventory will be at top for user
     }).catch(err => {
       console.log(err)
@@ -61,7 +62,8 @@ const Inventory = () => {
 
   return (
     <div className="inventory">
-      <InventoryForm />
+      <button className="inventory__show-form-btn" onClick={ () => setShowForm(!showForm) }>{ showForm ? 'Cancel' : 'Add New' }</button>
+      { showForm && <InventoryForm />}
       {inventory.map((el, index) => (
         <div key={index} className="inventory__card">
           <div className="inventory__who">Who: {el.who}</div>

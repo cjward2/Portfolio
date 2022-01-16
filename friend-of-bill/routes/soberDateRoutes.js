@@ -28,7 +28,6 @@ request('https://aa.org/pages/en_US/daily-reflection', (error, response, html) =
 
 router.get('/api/dailyReflection', (req, res) => {
     res.json({ dailyReflectionTitle, dailyReflectionP1, dailyReflectionPageNumber, dailyReflectionP2 });
-    console.log(dailyReflectionP2);
 });
 
 router.get('/api/soberdate/:id', (req, res) => {

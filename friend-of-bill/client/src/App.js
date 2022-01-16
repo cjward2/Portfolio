@@ -12,6 +12,7 @@ import NightlyReview from "./components/NightlyReview";
 import InventoryDetail from "./components/InventoryDetail";
 import NightlyReviewForm from "./components/NightlyReviewForm";
 import NightlyReviewDetail from "./components/NightlyReviewDetail";
+import OnAwakening from "./components/OnAwakening";
 import "./App.css";
 
 function App() {
@@ -43,13 +44,15 @@ function App() {
       <Route exact path="/reviews">
         <NightlyReview />
       </Route>
-      <Route path="/reviews/:id">
-        <NightlyReviewDetail />
-      </Route>
-      <Route path="/reviews/new">
+      <Route exact path="/reviews/new">
         <NightlyReviewForm />
       </Route>
-      
+      <Route exact path="/review/:id">
+        <NightlyReviewDetail />
+      </Route>
+      <Route exact path="/awakening">
+        <OnAwakening />
+      </Route>
     </Router>
   );
 }

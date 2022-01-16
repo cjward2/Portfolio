@@ -97,12 +97,12 @@ const NightlyReviewForm = () => {
           return res.json();
         })
         .then((data) => {
-          history.push('/reviews');
+          history.push(`/review/${data.review._id}`);
+          console.log(data.review);
         })
         .catch((err) => {
           console.log(err);
         });
-
     }
 
   return (
@@ -110,8 +110,7 @@ const NightlyReviewForm = () => {
       <form className="nightlyReview__form" onSubmit={ handleSubmit }>
         <div className="nightlyReview__form-group">
           <div className="nightlyReview__form-title">
-            1. When we retire at night, we constructively review our day. Were
-            we resentful?
+            1. When we retire at night, we constructively review our day. Were we resentful?
           </div>
           
           <div className="toggle-switch">

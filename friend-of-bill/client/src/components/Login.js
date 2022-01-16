@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, login, selectUser } from "../features/userSlice";
 import { selectMessage } from '../features/messageSlice';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import AlertMessage from './AlertMessage';
 import './Login.css';
 
@@ -78,6 +78,7 @@ const Login = () => {
             <div className="login__form-group">
                 <button type="submit" className="btn btn--green"><span>Login</span></button>
             </div>
+            Don't have an account? You can register <Link to="/register">here</Link>
             </form>
         </div>
     )
