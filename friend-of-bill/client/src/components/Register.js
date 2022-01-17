@@ -76,7 +76,7 @@ const Register = () => {
                 <label htmlFor="password2" className="register__form-label">Confirm Password</label>
             </div>
             <div className="register__form-group">
-                <button type="submit" className="btn btn--green">Register</button>
+                <button type="submit" className="landing__btn btn--green">Register</button>
             </div>
             Already have an account? Login <Link to="/login">here</Link>
             </form>

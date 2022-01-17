@@ -188,4 +188,6 @@
             animation-fill-mode: backwards;
   }
 
- 
+  a.landing__btn.btn--white.btn--animated {
+    width: 150px;
+}

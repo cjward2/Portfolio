@@ -76,7 +76,7 @@ const Login = () => {
                 <label htmlFor="password" className="login__form-label">Password</label>
             </div>
             <div className="login__form-group">
-                <button type="submit" className="btn btn--green"><span>Login</span></button>
+                <button type="submit" className="landing__btn btn--green"><span>Login</span></button>
             </div>
             Don't have an account? You can register <Link to="/register">here</Link>
             </form>

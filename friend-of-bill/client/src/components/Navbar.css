@@ -38,7 +38,7 @@
     position: fixed;
     top: 6.5rem;
     right: 6.5rem;
-    background-image: radial-gradient(#7ed56f, #28b485);
+    background-image: radial-gradient(rgba(142, 111, 213), rgba(129, 40, 180));
     z-index: 1000;
     -webkit-transition: -webkit-transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
     transition: -webkit-transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
@@ -108,7 +108,7 @@
   
   .navigation__link:hover, .navigation__link:active {
     background-position: 100%;
-    color: #55c57a;
+    color: rgba(129, 40, 180);
     -webkit-transform: translateX(1rem);
             transform: translateX(1rem);
   }
