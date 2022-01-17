@@ -78,7 +78,7 @@ const Login = () => {
             <div className="login__form-group">
                 <button type="submit" className="landing__btn btn--green"><span>Login</span></button>
             </div>
-            Don't have an account? You can register <Link to="/register">here</Link>
+            <div className="login__register-text">Don't have an account? You can register <Link className="login__register-link" to="/register">here</Link></div>
             </form>
         </div>
     )

@@ -1,6 +1,7 @@
 import React from "react";
 import { clearMsg, selectMessage, setMsg } from '../features/messageSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import './AlertMessage.css';
 
 
 const AlertMessage = () => {

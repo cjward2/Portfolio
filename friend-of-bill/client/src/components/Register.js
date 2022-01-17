@@ -78,7 +78,7 @@ const Register = () => {
             <div className="register__form-group">
                 <button type="submit" className="landing__btn btn--green">Register</button>
             </div>
-            Already have an account? Login <Link to="/login">here</Link>
+            <div className="register__login-text">Already have an account? Login <Link className="register__login-link" to="/login">here</Link></div>
             </form>
         </div>
     )
