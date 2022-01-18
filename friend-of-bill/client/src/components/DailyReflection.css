@@ -1,0 +1,25 @@
+.dailyReflection {
+    padding: 5rem;
+    font-family: 'Lato', sans-serif;
+}
+
+.dailyReflection__title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.dailyReflection__p1 {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.dailyReflection__pageNum {
+    font-size: 1.6rem;
+    font-style: italic;
+}
+
+p.dailyReflection__p2 {
+    font-size: 2rem;
+}
