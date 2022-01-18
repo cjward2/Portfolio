@@ -13,6 +13,7 @@ router.post('/api/login',
     console.log(req.body.email);
     User.findOne({email: req.body.email})
     .then(user => {
+
         console.log(user);
         res.json({ userID: user._id, name: user.name, err: false });
     })
@@ -24,12 +25,12 @@ router.post('/api/login',
 
 //POST register route
 router.post('/api/register', (req, res) => {
-    console.log(req.body);
     User.findOne({ email: req.body.email })
     .then(user => {
       if(user) {
         //If user already exists tell the front end
         res.json({ msg: 'User already exists', err: true });
+        return;
       } else {
         const newUser = new User ({
           name: req.body.name,
@@ -55,6 +56,34 @@ router.post('/api/register', (req, res) => {
     }));
       }
     })
+});
+
+router.post('/api/google/auth', (req, res) => {
+  console.log(req.body);
+  User.findOne({ email: req.body.email })
+  .then(user => {
+    if(user) {
+      console.log(user);
+      res.json(user);
+    } else {
+      const newUser = new User ({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.googleId,
+        googleImg: req.body.imageUrl,
+        googleId: req.body.googleId
+    });
+      newUser.save()
+      .then(user => {
+        res.json(user);
+      }).catch(err => {
+        console.log(err);
+        res.status(400).json({ msg: 'Error saving google User', err: true })
+      })
+    }
+  }).catch(err => {
+    console.log(err);
+  })
 });
 
 module.exports = router;

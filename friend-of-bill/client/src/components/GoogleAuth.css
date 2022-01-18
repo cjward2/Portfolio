@@ -1,0 +1,18 @@
+button.google-btn {
+    border-radius: 100px !important;
+    transition: all 0.25s;
+    margin-left: 20px;
+}
+
+button.google-btn > div {
+    border-radius: 100px !important;
+    margin-right: 0px !important;
+}
+
+button.google-btn:hover {
+    transform: translateY(-2px);
+}
+
+button.google-btn:focus {
+    transform: translateY(0px);
+}

@@ -16,8 +16,8 @@ import OnAwakening from "./components/OnAwakening";
 import "./App.css";
 
 function App() {
+  //Bring in user state from store
   const user = useSelector(selectUser);
-  console.log(user);
 
   return (
     <Router>

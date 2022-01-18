@@ -30,8 +30,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
 //Setup to read data from body
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());

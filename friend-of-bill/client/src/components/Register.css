@@ -54,6 +54,10 @@
   border-bottom: 3px solid #ff7730;
 }
 
+.register__form-input-error {
+  border-bottom: 3px solid #ff7730 !important;
+}
+
 .register__form-input::-webkit-input-placeholder {
   color: #999;
 }
@@ -73,6 +77,10 @@
   visibility: hidden;
   -webkit-transform: translateY(-4rem);
   transform: translateY(-4rem);
+}
+
+.register__button-group {
+  display: flex;
 }
 
 .btn--green {

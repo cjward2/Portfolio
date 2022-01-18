@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMsg, selectMessage } from '../features/messageSlice';
+import AlertMessage from './AlertMessage';
+import GoogleAuth from './GoogleAuth';
 
 import './Register.css';
 
@@ -24,7 +26,13 @@ const Register = () => {
         console.log('submit');
         //prevent default action of form
         event.preventDefault();
-
+        if(formData.password1 !== formData.password2) {
+            dispatch(setMsg({ msg: 'Passwords do not match', err: true }));
+            return;
+        } else if(formData.password1.length < 6) {
+            dispatch(setMsg({ msg: 'Password must be at least 6 characters long', err: true }));
+            return;
+        }
         fetch('/api/register', {
             method: 'POST',
             headers: {
@@ -38,6 +46,11 @@ const Register = () => {
             return res.json();
         }).then(data => {
             console.log(data);
+            if(data.err) {
+                dispatch(setMsg({ msg: 'It looks like you already have an account. Please login to continue', err: true }));
+                history.push('/login');
+                throw new Error('User already registered');
+            }
             dispatch(setMsg({ msg: 'You are registered and can now login', err: false }))
             history.push('/login');
         }).catch(err => {
@@ -49,7 +62,6 @@ const Register = () => {
     }
 
     const handleChange = event => {
-        console.log('handle change');
         setFormData({
             ...formData, //spread operator here to maintain previous data
             [event.target.name]: event.target.value  //update state with value change
@@ -58,6 +70,7 @@ const Register = () => {
 
     return (
         <div className="register">
+            { message && <AlertMessage />}
             <form className="register__form" onSubmit={ handleSubmit }>
             <div className="register__form-group">
                 <input type="text" className="register__form-input" placeholder="Name" name="name" id="name" required autoComplete="off" value={ formData.name } onChange={ handleChange }/>
@@ -68,15 +81,16 @@ const Register = () => {
                 <label htmlFor="email" className="register__form-label">Email address</label>
             </div>
             <div className="register__form-group">
-                <input type="password" className="register__form-input" placeholder="Create Password" name="password1" id="password1" required autoComplete="off" value={ formData.password1 } onChange={ handleChange }/>
+                <input type="password" className={`register__form-input ${ formData.password1.length < 6 &&  formData.password1.length > 0 ? 'register__form-input-error' : '' }`} placeholder="Create Password" name="password1" id="password1" required autoComplete="off" value={ formData.password1 } onChange={ handleChange }/>
                 <label htmlFor="password1" className="register__form-label">Create Password</label>
             </div>
             <div className="register__form-group">
-                <input type="password" className="register__form-input" placeholder="Confirm Password" name="password2" id="password2" required autoComplete="off" value={ formData.password2 } onChange={ handleChange }/>
+                <input type="password" className={`register__form-input ${ formData.password2.length < 6 &&  formData.password2.length > 0 ? 'register__form-input-error' : '' }`} placeholder="Confirm Password" name="password2" id="password2" required autoComplete="off" value={ formData.password2 } onChange={ handleChange }/>
                 <label htmlFor="password2" className="register__form-label">Confirm Password</label>
             </div>
-            <div className="register__form-group">
+            <div className="register__form-group register__button-group">
                 <button type="submit" className="landing__btn btn--green">Register</button>
+                <GoogleAuth />
             </div>
             <div className="register__login-text">Already have an account? Login <Link className="register__login-link" to="/login">here</Link></div>
             </form>

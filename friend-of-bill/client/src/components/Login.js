@@ -2,9 +2,10 @@ import React from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, login, selectUser } from "../features/userSlice";
-import { selectMessage } from '../features/messageSlice';
+import { selectMessage, setMsg } from '../features/messageSlice';
 import { useHistory, Link } from 'react-router-dom';
 import AlertMessage from './AlertMessage';
+import GoogleAuth from './GoogleAuth';
 import './Login.css';
 
 
@@ -49,7 +50,7 @@ const Login = () => {
             history.push('/dashboard');
         }).catch(err => {
             console.log('Error block' , err);
-            //this is where I will display message to user
+            dispatch(setMsg({ msg: 'Invalid Credentials', err: true })); //If authentication is not passed, display message for user
         });
         //Reset form data
         setFormData(initialState);
@@ -75,8 +76,9 @@ const Login = () => {
                 <input type="password" className="login__form-input" placeholder="Password" name="password" id="password" required autoComplete="off" value={ formData.password } onChange={ handleChange }/>
                 <label htmlFor="password" className="login__form-label">Password</label>
             </div>
-            <div className="login__form-group">
-                <button type="submit" className="landing__btn btn--green"><span>Login</span></button>
+            <div className="login__form-group login__button-group">
+                <button type="submit" className="landing__btn btn--green login__btn"><span>Login</span></button>
+                <GoogleAuth />
             </div>
             <div className="login__register-text">Don't have an account? You can register <Link className="login__register-link" to="/register">here</Link></div>
             </form>
