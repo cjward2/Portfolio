@@ -73,15 +73,15 @@
   display: flex;
 }
 
+.btn--green.login__btn {
+  padding: 1.2rem 2.6rem;
+}
+
 .btn--green {
   background: #55c57a;
   color: #fff;
   padding: 0.8rem 1.8rem;
   font-size: 1.4rem;
-}
-
-.btn--green.login__btn {
-  padding: 1.2rem 2.6rem;
 }
 
 .btn--green::after {

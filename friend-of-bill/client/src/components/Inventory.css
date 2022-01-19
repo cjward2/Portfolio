@@ -1,0 +1,76 @@
+.inventory__card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 75vh;
+}
+
+.inventory__card {
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 1.5rem;
+  padding: 2.5rem;
+  text-align: center;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+          box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  -webkit-transition: -webkit-transform .3s;
+  transition: -webkit-transform .3s;
+  transition: transform .3s;
+  transition: transform .3s, -webkit-transform .3s;
+  width: 25%;
+  height: 22rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.inventory__card {
+    margin-right: 2.5rem;
+}
+
+.inventory__btn-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.inventory__detail-link,
+.inventory__detail-link:link,
+.inventory__detail-link:visited {
+    text-decoration: none;
+    color: #55c57a;
+    transition: all 0.2s;
+}
+
+.inventory__detail-link:hover {
+    transform: translateY(-2px) scale(1.05);
+}
+
+button.inventory__delete-btn {
+    border: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 100px;
+    background: red;
+    color: #fff;
+    display: inline-block;
+    margin-top: 45px;
+}
+
+button.inventory__delete-btn::after {
+    background: red;
+}
+
+.inventory__form-group > button.red--btn.btn--green.landing__btn {
+    display: inline-block;
+    margin-left: 30px;
+}
+
+.red--btn {
+    background: red !important;
+}
+
+.red--btn:after {
+    background: red !important;
+}

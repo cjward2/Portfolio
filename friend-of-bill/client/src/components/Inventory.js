@@ -20,8 +20,6 @@ const Inventory = () => {
     history.push("/login");
   }
 
-  const [showForm, setShowForm] = useState(false);
-
   useEffect(() => {
     fetch(`/api/inventories/${user.id}`)
       .then((res) => {
@@ -62,17 +60,21 @@ const Inventory = () => {
 
   return (
     <div className="inventory">
-      <button className="inventory__show-form-btn" onClick={ () => setShowForm(!showForm) }>{ showForm ? 'Cancel' : 'Add New' }</button>
-      { showForm && <InventoryForm />}
+      <InventoryForm />
+      <div className="inventory__card-container">
       {inventory.map((el, index) => (
         <div key={index} className="inventory__card">
           <div className="inventory__who">Who: {el.who}</div>
           <div className="inventory__why">Why: {el.why}</div>
           <div className="inventory__why">My Part: {el.myPart}</div>
-          <Link to={`/inventory/${el._id}`}>View Details</Link>
-          <button onClick={ () => handleDelete(el._id) } className="inventory__delete-btn">Delete</button>
+          <div className="inventory__btn-group">
+          <Link className="inventory__detail-link" to={`/inventory/${el._id}`}>View Details</Link>
+          <button onClick={ () => handleDelete(el._id) } className="inventory__delete-btn landing__btn btn--green">Delete</button>
+          </div>
         </div>
       ))}
+      </div>
+      
     </div>
   );
 };

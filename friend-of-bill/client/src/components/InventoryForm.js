@@ -89,6 +89,7 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
 
   const [formData, setFormData] = useState(formInitialState);
   const [isChecked, setIsChecked] = useState(checkboxInitialState);
+  const [showForm, setShowForm] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -151,139 +152,147 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
 
   return (
     <div>
-      <form className="inventory__form" onSubmit={handleSubmit}>
-        <div className="inventory__form-group">
-          <input
-            type="text"
-            className="inventory__form-input"
-            placeholder="Who or what are you resentful towards"
-            name="who"
-            id="who"
-            required
-            autoComplete="off"
-            onChange={handleChange}
-            value={formData.who}
-          />
-          <label htmlFor="who" className="inventory__form-label">
-            Who or what are you resentful towards
-          </label>
-        </div>
-        <div className="inventory__form-group">
-          <input
-            type="text"
-            className="inventory__form-input"
-            placeholder="Why are you resentful"
-            name="why"
-            id="why"
-            required
-            autoComplete="off"
-            onChange={handleChange}
-            value={formData.why}
-          />
-          <label htmlFor="why" className="inventory__form-label">
-            Why are you resentful
-          </label>
-        </div>
-        <div className="inventory__affects-my">Affects my:</div>
-        <div className="inventory__form-group">
-          <input
-            type="checkbox"
-            className="inventory__form-input"
-            name="fear"
-            id="fear"
-            autoComplete="off"
-            onChange={() => checkboxChange(0)}
-            isChecked={ isChecked[0].checked }
-          />
-          <label htmlFor="fear" className="inventory__form-label">
-            Fear
-          </label>
-        </div>
-        <div className="inventory__form-group">
-          <input
-            type="checkbox"
-            className="inventory__form-input"
-            name="selfEsteem"
-            id="selfEsteem"
-            autoComplete="off"
-            onChange={() => checkboxChange(1)}
-            checked={ isChecked[1].checked }
-          />
-          <label htmlFor="selfEsteem" className="inventory__form-label">
-            Self-esteem
-          </label>
-        </div>
-        <div className="inventory__form-group">
-          <input
-            type="checkbox"
-            className="inventory__form-input"
-            name="security"
-            id="security"
-            autoComplete="off"
-            onChange={() => checkboxChange(2)}
-            checked={ isChecked[2].checked }
-          />
-          <label htmlFor="security" className="inventory__form-label">
-            Security
-          </label>
-        </div>
-        <div className="inventory__form-group">
-          <input
-            type="checkbox"
-            className="inventory__form-input"
-            name="personalRelationship"
-            id="personalRelationship"
-            autoComplete="off"
-            onChange={() => checkboxChange(3)}
-            checked={ isChecked[3].checked }
-          />
-          <label
-            htmlFor="personalRelationship"
-            className="inventory__form-label"
-          >
-            Personal Relationship
-          </label>
-        </div>
-        <div className="inventory__form-group">
-          <input
-            type="checkbox"
-            className="inventory__form-input"
-            name="sexRelations"
-            id="sexRelations"
-            autoComplete="off"
-            onChange={() => checkboxChange(4)}
-            checked={ isChecked[4].checked }
-          />
-          <label htmlFor="sexRelations" className="inventory__form-label">
-            Sex Relations
-          </label>
-        </div>
-        <div className="inventory__form-group">
-          <input
-            type="checkbox"
-            className="inventory__form-input"
-            name="pride"
-            id="pride"
-            autoComplete="off"
-            onChange={() => checkboxChange(5)}
-            checked={ isChecked[5].checked }
-          />
-          <label htmlFor="pride" className="inventory__form-label">
-            Pride
-          </label>
-        </div>
-        <div className="inventory__form-group">
-          <div className="form-floating">
-          <textarea className="form-control" placeholder="Where have I been selfish, dishonest, or afraid?" id="myPart" name="myPart" style={{'height':'125px'}} onChange={ handleChange }></textarea>
-          <label htmlFor="myPart">Where have I been selfish, dishonest, or afraid?</label>
+      { !showForm &&  <button className="inventory__show-form-btn landing__btn btn--green" onClick={ () => setShowForm(!showForm) }>Add New</button>}
+      
+      { showForm && (
+        <div className="inventory__form--container">
+          <form className="inventory__form" onSubmit={handleSubmit}>
+          <div className="inventory__form-group">
+            <input
+              type="text"
+              className="inventory__form-input"
+              placeholder="Who or what are you resentful towards"
+              name="who"
+              id="who"
+              required
+              autoComplete="off"
+              onChange={handleChange}
+              value={formData.who}
+            />
+            <label htmlFor="who" className="inventory__form-label">
+              Who or what are you resentful towards
+            </label>
           </div>
+          <div className="inventory__form-group">
+            <input
+              type="text"
+              className="inventory__form-input"
+              placeholder="Why are you resentful"
+              name="why"
+              id="why"
+              required
+              autoComplete="off"
+              onChange={handleChange}
+              value={formData.why}
+            />
+            <label htmlFor="why" className="inventory__form-label">
+              Why are you resentful
+            </label>
+          </div>
+          <div className="inventory__affects-my">Affects my:</div>
+          <div className="inventory__form-group">
+            <input
+              type="checkbox"
+              className="inventory__form-input"
+              name="fear"
+              id="fear"
+              autoComplete="off"
+              onChange={() => checkboxChange(0)}
+              isChecked={ isChecked[0].checked }
+            />
+            <label htmlFor="fear" className="inventory__form-label">
+              Fear
+            </label>
+          </div>
+          <div className="inventory__form-group">
+            <input
+              type="checkbox"
+              className="inventory__form-input"
+              name="selfEsteem"
+              id="selfEsteem"
+              autoComplete="off"
+              onChange={() => checkboxChange(1)}
+              checked={ isChecked[1].checked }
+            />
+            <label htmlFor="selfEsteem" className="inventory__form-label">
+              Self-esteem
+            </label>
+          </div>
+          <div className="inventory__form-group">
+            <input
+              type="checkbox"
+              className="inventory__form-input"
+              name="security"
+              id="security"
+              autoComplete="off"
+              onChange={() => checkboxChange(2)}
+              checked={ isChecked[2].checked }
+            />
+            <label htmlFor="security" className="inventory__form-label">
+              Security
+            </label>
+          </div>
+          <div className="inventory__form-group">
+            <input
+              type="checkbox"
+              className="inventory__form-input"
+              name="personalRelationship"
+              id="personalRelationship"
+              autoComplete="off"
+              onChange={() => checkboxChange(3)}
+              checked={ isChecked[3].checked }
+            />
+            <label
+              htmlFor="personalRelationship"
+              className="inventory__form-label"
+            >
+              Personal Relationship
+            </label>
+          </div>
+          <div className="inventory__form-group">
+            <input
+              type="checkbox"
+              className="inventory__form-input"
+              name="sexRelations"
+              id="sexRelations"
+              autoComplete="off"
+              onChange={() => checkboxChange(4)}
+              checked={ isChecked[4].checked }
+            />
+            <label htmlFor="sexRelations" className="inventory__form-label">
+              Sex Relations
+            </label>
+          </div>
+          <div className="inventory__form-group">
+            <input
+              type="checkbox"
+              className="inventory__form-input"
+              name="pride"
+              id="pride"
+              autoComplete="off"
+              onChange={() => checkboxChange(5)}
+              checked={ isChecked[5].checked }
+            />
+            <label htmlFor="pride" className="inventory__form-label">
+              Pride
+            </label>
+          </div>
+          <div className="inventory__form-group">
+            <div className="form-floating">
+            <textarea className="form-control" placeholder="Where have I been selfish, dishonest, or afraid?" id="myPart" name="myPart" style={{'height':'125px'}} onChange={ handleChange }></textarea>
+            <label htmlFor="myPart">Where have I been selfish, dishonest, or afraid?</label>
+            </div>
+          </div>
+          <div className="inventory__form-group">
+            <button type="submit" className="btn--green landing__btn">
+              Save
+            </button>
+            <button className="red--btn btn--green landing__btn" onClick={ () => setShowForm(false) }>Cancel</button>
+          </div>
+        </form>
         </div>
-        <div className="inventory__form-group">
-          <button type="submit" className="btn btn--green">
-            Save
-          </button>
-        </div>
-      </form>
+      ) }
+      
     </div>
   );
 };

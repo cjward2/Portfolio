@@ -87,7 +87,7 @@ const SoberDate = () => {
                     <h3 className="soberDate__enter-date-text">Enter your Sobriety Date here:</h3>
                     <form className="soberDate__form-control" onSubmit={ handleSubmit }>
                     <input className="soberDate__sober-input" type="date" name="soberDate" id="soberDate" onChange={ handleChange }/>
-                    <button className="soberDate__form-submit soberDate-btn btn--green landing__btn btn--green">Save</button>
+                    <button className="soberDate__form-submit soberDate-btn btn--green landing__btn">Save</button>
                     </form>
                     </div>
                 ) : (
