@@ -40,12 +40,13 @@ const InventoryDetail = () => {
             pride={inventoryDetail.pride}
             myPart={inventoryDetail.myPart}
             id={ id.id }
+            editForm={ true }
             />
         )
     } else {
         return (
             <div className="inventory-detail">
-                Inventory Detail
+                <h1 className="inventory-detail__header">Inventory Detail</h1>
                 <div className="inventory-detail__who">
                    Who: { inventoryDetail.who }
                 </div>
@@ -72,11 +73,11 @@ const InventoryDetail = () => {
                     <div>
                     { inventoryDetail.pride !== 'false' && 'Pride' }
                     </div>
+                </div>
                 <div className="inventory-detail__myPart">
                    My Part: { inventoryDetail.myPart }
                 </div>
-                    <button onClick={ () => setEdit(true) }>Edit</button>
-                </div>
+                    <button className="landing__btn btn--green" onClick={ () => setEdit(true) }>Edit</button>
             </div>
         )
     }

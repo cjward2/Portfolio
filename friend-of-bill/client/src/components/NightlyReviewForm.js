@@ -250,7 +250,7 @@ const NightlyReviewForm = () => {
           <label htmlFor="describe10">Describe if needed</label>
           </div>
         </div>
-        <button className="nightlyReview-btn" type="submit">Save</button>
+        <button className="nightlyReview-btn inventory__show-form-btn landing__btn btn--green" type="submit">Save</button>
       </form>
     </div>
   );

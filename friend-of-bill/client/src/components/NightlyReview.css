@@ -1,4 +1,33 @@
+.nightlyReview__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a.inventory__detail-link {
+    display: block;
+}
+
 .nightlyReview__card {
-    padding: 2.5rem;
-    
+        background-color: rgba(255, 255, 255, 0.8);
+        font-size: 1.5rem;
+        padding: 2.5rem;
+        text-align: center;
+        border-radius: 3px;
+        box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+        transition: transform .3s;
+        width: 25%;
+        height: 22rem;
+        font-family: 'Lato', sans-serif;
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin-right: 2rem;
+}
+
+a.nightly-review-link.inventory__show-form-btn.landing__btn.btn--green {
+    padding: 0.8rem 1.8rem;
+}
+
+.nightly-review-link:hover {
+    color: #fff;
 }

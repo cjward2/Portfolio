@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 
 import "./InventoryForm.css";
 
-const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelationship, sexRelations, pride, myPart, id }) => {
+const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelationship, sexRelations, pride, myPart, id, editForm }) => {
   //Bring in user info from store
   const user = useSelector(selectUser);
   const inventory = useSelector(selectInventory);
@@ -154,7 +154,7 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
     <div>
       { !showForm &&  <button className="inventory__show-form-btn landing__btn btn--green" onClick={ () => setShowForm(!showForm) }>Add New</button>}
       
-      { showForm && (
+      { showForm || editForm ? (
         <div className="inventory__form--container">
           <form className="inventory__form" onSubmit={handleSubmit}>
           <div className="inventory__form-group">
@@ -193,49 +193,49 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
           <div className="inventory__form-group">
             <input
               type="checkbox"
-              className="inventory__form-input"
+              className="inventory__form-input-checkbox"
               name="fear"
               id="fear"
               autoComplete="off"
               onChange={() => checkboxChange(0)}
               isChecked={ isChecked[0].checked }
             />
-            <label htmlFor="fear" className="inventory__form-label">
+            <label htmlFor="fear" className="inventory__form-label-checkbox">
               Fear
             </label>
           </div>
           <div className="inventory__form-group">
             <input
               type="checkbox"
-              className="inventory__form-input"
+              className="inventory__form-input-checkbox"
               name="selfEsteem"
               id="selfEsteem"
               autoComplete="off"
               onChange={() => checkboxChange(1)}
               checked={ isChecked[1].checked }
             />
-            <label htmlFor="selfEsteem" className="inventory__form-label">
+            <label htmlFor="selfEsteem" className="inventory__form-label-checkbox">
               Self-esteem
             </label>
           </div>
           <div className="inventory__form-group">
             <input
               type="checkbox"
-              className="inventory__form-input"
+              className="inventory__form-input-checkbox"
               name="security"
               id="security"
               autoComplete="off"
               onChange={() => checkboxChange(2)}
               checked={ isChecked[2].checked }
             />
-            <label htmlFor="security" className="inventory__form-label">
+            <label htmlFor="security" className="inventory__form-label-checkbox">
               Security
             </label>
           </div>
           <div className="inventory__form-group">
             <input
               type="checkbox"
-              className="inventory__form-input"
+              className="inventory__form-input-checkbox"
               name="personalRelationship"
               id="personalRelationship"
               autoComplete="off"
@@ -244,7 +244,7 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
             />
             <label
               htmlFor="personalRelationship"
-              className="inventory__form-label"
+              className="inventory__form-label-checkbox"
             >
               Personal Relationship
             </label>
@@ -252,28 +252,28 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
           <div className="inventory__form-group">
             <input
               type="checkbox"
-              className="inventory__form-input"
+              className="inventory__form-input-checkbox"
               name="sexRelations"
               id="sexRelations"
               autoComplete="off"
               onChange={() => checkboxChange(4)}
               checked={ isChecked[4].checked }
             />
-            <label htmlFor="sexRelations" className="inventory__form-label">
+            <label htmlFor="sexRelations" className="inventory__form-label-checkbox">
               Sex Relations
             </label>
           </div>
           <div className="inventory__form-group">
             <input
               type="checkbox"
-              className="inventory__form-input"
+              className="inventory__form-input-checkbox"
               name="pride"
               id="pride"
               autoComplete="off"
               onChange={() => checkboxChange(5)}
               checked={ isChecked[5].checked }
             />
-            <label htmlFor="pride" className="inventory__form-label">
+            <label htmlFor="pride" className="inventory__form-label-checkbox">
               Pride
             </label>
           </div>
@@ -291,7 +291,7 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
           </div>
         </form>
         </div>
-      ) }
+      ) : ( <div></div> ) }
       
     </div>
   );

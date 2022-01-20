@@ -1,0 +1,37 @@
+.inventory-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inventory-detail__header {
+    font-size: 2.8rem;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    margin-bottom: 25px;
+}
+
+.inventory-detail__who,
+.inventory-detail__why {
+    font-size: 1.7rem;
+    padding: 5px;
+}
+
+.inventory-detail__affects {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.inventory-detail__affects > * {
+    font-size: 1.4rem;
+    font-weight: normal;
+    padding: 5px;
+    text-align: center;
+}
+
+.inventory-detail__myPart {
+    font-size: 1.7rem;
+    padding: 5px;
+    margin: 20px 0;
+}

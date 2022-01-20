@@ -18,6 +18,11 @@ form.inventory__form {
 
 .form-floating {
     margin-top: 15px;
+    
+}
+
+textarea#myPart {
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .inventory__form--container {
@@ -109,60 +114,19 @@ form.inventory__form {
   .btn--green::after {
     background-color: #55c57a;
   }
-  
-  .login__register-text {
-    font-size: 1.2rem;
+
+  .inventory__affects-my {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 10px;
   }
   
-  .login__register-link:link,
-  .login__register-link:visited {
-    text-decoration: none;
-    color: #55c57a;
-    font-size: 1.2rem;
+  .inventory__form-label-checkbox {
+    font-size: 1.5rem;
     display: inline-block;
-    transition: all 0.2s;
+    margin-left: 15px;
   }
-  
-  .login__register-link:hover {
-    transform: translateY(-2px) scale(1.1);
-  }
-  
-  .login__register-link:focus {
-    transform: translateY(0px) scale(1);
-  }
-  
-  @media only screen and (max-width: 75em) {
-    .inventory {
-      background-image: linear-gradient(
-          105deg,
-          rgba(255, 255, 255, 0.9) 0%,
-          rgba(255, 255, 255, 0.9) 65%,
-          transparent 65%
-        ),
-        url("../assets/img/landing-page-background.jpg");
-      background-size: cover;
-    }
-  }
-  
-  @media only screen and (max-width: 56.25em) {
-    .inventory {
-      background-image: -webkit-gradient(
-          linear,
-          left top,
-          right top,
-          from(rgba(255, 255, 255, 0.9)),
-          to(rgba(255, 255, 255, 0.9))
-        ),
-        url("../assets/img/landing-page-background.jpg");
-      background-image: linear-gradient(
-          to right,
-          rgba(255, 255, 255, 0.9) 0%,
-          rgba(255, 255, 255, 0.9) 100%
-        ),
-        url("../assets/img/landing-page-background.jpg");
-    }
-  }
-  
+
   @media only screen and (max-width: 75em) {
     .inventory__form {
       width: 65%;

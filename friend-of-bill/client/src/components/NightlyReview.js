@@ -61,14 +61,16 @@ const NightlyReview = () => {
   return (
     <div className="nightlyReview">
       <h1>Nightly Reviews</h1>
-      <Link className="new-review-link" to="/reviews/new">New Review</Link>
+      <Link className="nightly-review-link inventory__show-form-btn landing__btn btn--green" to="/reviews/new">New Review</Link>
+      <div className="nightlyReview__container">
       { reviews.map(el => (
             <div className="nightlyReview__card" key={ el._id }>
               { new Date(el.date).toLocaleDateString() }
-              <Link to={`/review/${el._id}`}>View Details</Link>
-              <button onClick={() => handleDelete(el._id) }>Delete</button>
+              <Link className="inventory__detail-link" to={`/review/${el._id}`}>View Details</Link>
+              <button className="inventory__delete-btn landing__btn btn--green" onClick={() => handleDelete(el._id) }>Delete</button>
             </div>
         ))}
+        </div>
     </div>
   );
 };

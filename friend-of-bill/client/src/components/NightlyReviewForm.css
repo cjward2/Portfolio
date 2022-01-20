@@ -63,7 +63,7 @@ textarea#describe8 {
   .inner:before {
     content: "YES";
     padding-left: 10px;
-    background-color: rgb(6, 175, 6);
+    background-color: #55c57a;
     color: #fff;
   }
   .inner:after {
