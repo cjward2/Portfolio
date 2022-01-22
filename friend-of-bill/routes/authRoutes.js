@@ -58,18 +58,18 @@ router.post('/api/register', (req, res) => {
     })
 });
 
+//Post route for google Oauth flow
 router.post('/api/google/auth', (req, res) => {
-  console.log(req.body);
   User.findOne({ email: req.body.email })
   .then(user => {
     if(user) {
-      console.log(user);
+      //If oauth user already has an account, send that user model up to front end instead of creating a new account
       res.json(user);
     } else {
       const newUser = new User ({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.googleId,
+        password: req.body.googleId,  //Create pseudo password for user to prevent bcrypt from thowing errors on the edge case user registers with oauth and then tries to login through form
         googleImg: req.body.imageUrl,
         googleId: req.body.googleId
     });
@@ -82,7 +82,7 @@ router.post('/api/google/auth', (req, res) => {
       })
     }
   }).catch(err => {
-    console.log(err);
+    res.status(400).json({ msg: 'Error in oauth register route', err: true });
   })
 });
 

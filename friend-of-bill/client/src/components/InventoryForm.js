@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, login, selectUser } from "../features/userSlice";
-import { setInventory, clearInventory, selectInventory } from "../features/inventorySlice";
+import { selectUser } from "../features/userSlice";
+import { setInventory, selectInventory } from "../features/inventorySlice";
 import { useHistory } from "react-router-dom";
 
 import "./InventoryForm.css";
@@ -142,16 +142,17 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
   };
 
   const checkboxChange = (position) => {
-    const checked = isChecked.map((item, index) => {
+    const checked = isChecked.map((item, index) => {  //cycle through isChecked array and if the postiton that is passed in equals the index, set the item.checked value to the opposite -- true to false vice cersa
       return index === position
         ? { type: item.type, checked: !item.checked }
-        : { type: item.type, checked: item.checked };
+        : { type: item.type, checked: item.checked };  //Otherwise set it to whatever it currently is -- do nothing
     });
-    setIsChecked(checked);
+    setIsChecked(checked); //Then set the state to checked
   };
 
   return (
     <div>
+      {/* consitionally display button to user. If they already clicked add new, i dont want them to still see it */}
       { !showForm &&  <button className="inventory__show-form-btn landing__btn btn--green" onClick={ () => setShowForm(!showForm) }>Add New</button>}
       
       { showForm || editForm ? (

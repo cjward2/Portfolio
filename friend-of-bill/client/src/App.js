@@ -1,7 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { logout, login, selectUser } from "./features/userSlice";
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
+import "./App.css";
+
+//Component imports
 import Landing from "./components/Landing";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -13,7 +16,7 @@ import InventoryDetail from "./components/InventoryDetail";
 import NightlyReviewForm from "./components/NightlyReviewForm";
 import NightlyReviewDetail from "./components/NightlyReviewDetail";
 import OnAwakening from "./components/OnAwakening";
-import "./App.css";
+
 
 function App() {
   //Bring in user state from store

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout, login, selectUser } from "../features/userSlice";
+import { login } from "../features/userSlice";
 import { selectMessage, setMsg } from '../features/messageSlice';
 import { useHistory, Link } from 'react-router-dom';
 import AlertMessage from './AlertMessage';
@@ -13,7 +13,6 @@ const Login = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const message = useSelector(selectMessage);
-    console.log(message);
 
     const initialState = {
         email: "",

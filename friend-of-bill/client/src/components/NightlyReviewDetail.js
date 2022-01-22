@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 const NightlyReviewDetail = () => {
-    const params = useParams();
-    console.log(params);
+    const params = useParams();  //I want the id from the route to pass into my endpoint
 
     const [review, setReview] = useState({});
 

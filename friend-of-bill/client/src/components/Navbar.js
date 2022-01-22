@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { logout, login, selectUser } from "../features/userSlice";
-import { useDispatch, useSelector } from 'react-redux';
-import { setMsg, selectMessage } from '../features/messageSlice';
+import { logout } from "../features/userSlice";
+import { useDispatch } from 'react-redux';
+import { setMsg } from '../features/messageSlice';
 import { useHistory } from 'react-router-dom';
 
 import './Navbar.css';
@@ -13,7 +13,7 @@ const Navbar = () => {
 
 
     const handleClick = () => {
-        document.querySelector('input#navi-toggle').checked = false;
+        document.querySelector('input#navi-toggle').checked = false;  //I built my navbar witha checkbox using the :checked pseudoselector. To ensure it close afdter user clicks a link, set checked to false
     }
 
     const handleLogout = () => {

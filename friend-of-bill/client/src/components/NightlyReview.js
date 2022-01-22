@@ -1,15 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { logout, login, selectUser } from "../features/userSlice";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice";
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import "./NightlyReview.css";
-import NightlyReviewForm from "./NightlyReviewForm";
 
 const NightlyReview = () => {
     const [reviews, setReviews] = useState([]);
-    const [addNewReview, setAddNewReview] = useState(false);
 
   //Bring in user info from store
   const user = useSelector(selectUser);
@@ -31,7 +29,7 @@ const NightlyReview = () => {
       })
       .then((data) => {
         console.log(data.review);
-        setReviews(data.review.reverse());
+        setReviews(data.review.reverse());  //I want the most recent review to be first for the user. Easiest way to do that for me way to just reverse the array being sent from my backend
       })
       .catch((err) => {
         //this is where I will display message to user

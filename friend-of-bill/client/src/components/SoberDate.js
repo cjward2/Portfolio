@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { logout, login, selectUser } from "../features/userSlice";
+import { selectUser } from "../features/userSlice";
 import { setMsg, selectMessage } from '../features/messageSlice';
 import { useHistory } from 'react-router-dom';
 import './SoberDate.css';
@@ -14,10 +14,7 @@ const SoberDate = () => {
     //Bring in user info from store
     const user = useSelector(selectUser);
     const history = useHistory();
-    console.log(user.id)
 
-    //Bring in message state from store
-    const message = useSelector(selectMessage);
     const dispatch = useDispatch();
 
     //if no user is logged in, redirect them back to login page
@@ -57,8 +54,7 @@ const SoberDate = () => {
             }
             return res.json();
         }).then(data => {
-            console.log(data)
-            setSoberDate(new Date(data.soberDate.date).toUTCString().substr(0, 16));
+            setSoberDate(new Date(data.soberDate.date).toUTCString().substr(0, 16)); //Create new date in a string so i can use substr to take what i want from it
             setEditSoberDate(false);
         }).catch(err => {
             console.log(err);
@@ -74,10 +70,10 @@ const SoberDate = () => {
         setEditSoberDate(true);
     }
 
-    let dateDifference = new Date().getTime() - new Date(soberDate).getTime();
-    let days = Math.floor(dateDifference/(1000 * 3600 * 24));
-    let hours = ((dateDifference / 3600000).toFixed(0)).toString();
-    let years = days/365;
+    let dateDifference = new Date().getTime() - new Date(soberDate).getTime();  //First get difference b/w two dates. will be returned in ms
+    let days = Math.floor(dateDifference/(1000 * 3600 * 24));  //Calculate number of days. Using math.floor to round it down. I didnt want a decimal here
+    let hours = ((dateDifference / 3600000).toFixed(0)).toString(); //calculate hours and use toFixed to limit decimal point to two.
+    let years = days/365;  //Use days calculated baove to get years
 
         return (
             <div className="soberDate">

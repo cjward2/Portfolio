@@ -2,24 +2,24 @@ const express = require('express');
 const router = express.Router();
 const Inventory = require('../models/inventory');
 
+//Get route for all inventories
 router.get('/api/inventories/:id', (req, res) => {
-    Inventory.find({ id: req.params.id })
+    Inventory.find({ id: req.params.id })  //Pass in user id from req.params so i can find all inventories with that id. That is how im relating data to a specific user
     .then(inventory => {
-      console.log(inventory);
-      res.json({ inventory });
+      res.json({ inventory });  //Send up all inventories
     }).catch(err => {
-      console.log(err);
-      res.status(400).json({ msg: 'Error finding Inventories', err: true });
+      res.status(400).json({ msg: 'Error finding Inventories', err: true });  //Alert front end in case of error
     })
   });
   
+  //Post route for new inventories
   router.post('/api/inventory/new', (req, res) => {
-    const { user, formData, isChecked } = req.body;
+    const { user, formData, isChecked } = req.body;  //Destructure what i want out out req.body object
     let newInventory = new Inventory({
-      id: user.id,
+      id: user.id, //Save user id in document so i can form relationship
       who: formData.who,
       why: formData.why,
-      fear: isChecked[0].checked && isChecked[0].type,
+      fear: isChecked[0].checked && isChecked[0].type,  //If isChecked.checked is true, set type name in DB, otherwise it will be false
       selfEsteem: isChecked[1].checked && isChecked[1].type,
       security: isChecked[2].checked && isChecked[2].type,
       personalRelationship: isChecked[3].checked && isChecked[3].type,
@@ -27,26 +27,25 @@ router.get('/api/inventories/:id', (req, res) => {
       pride: isChecked[5].checked && isChecked[5].type,
       myPart: formData.myPart
     });
-    newInventory.save()
+    newInventory.save()  //Save new inventory
     .then(inventory => {
-      console.log(inventory);
-      res.json(inventory);
+      res.json(inventory);  //Send it back to front end to change state
     }).catch(err => {
-      console.log(err);
       res.status(400).json({ msg: 'Error saving Inventory', err: true });
     });
   });
   
+  //GET route for specific inventory
   router.get('/api/inventory/:id', (req, res) => {
-      Inventory.findById(req.params.id)
+      Inventory.findById(req.params.id)  //Find specific inventory based of route params
       .then(inventory => {
-        console.log(inventory)
-        res.json(inventory);
+        res.json(inventory);  //When its found send it back to front end
       }).catch(err => {
-        res.status(400).json({ msg: 'Error finding inventory', err: true });
+        res.status(400).json({ msg: 'Error finding inventory', err: true }); //If error occurs alert front end
       })
-  })
+  });
   
+  //PUT route for inventory editing
   router.put('/api/inventory/:id', (req, res) => {
     const { formData, isChecked } = req.body;
     Inventory.findByIdAndUpdate({ _id: req.params.id }, {
@@ -61,14 +60,13 @@ router.get('/api/inventories/:id', (req, res) => {
           myPart: formData.myPart
     })
     .then(inventory => {
-      console.log(inventory, 'yoooooooo');
       res.json({ inventory })
     }).catch(err => {
-      console.log(err);
       res.status(404).json({ msg: 'Error updating Inventory', err: true });
     })
   });
   
+  //Delete route for inventory
 router.delete('/api/inventory/:id', (req, res) => {
     Inventory.deleteOne({ _id: req.params.id })
     .then(inventory => {

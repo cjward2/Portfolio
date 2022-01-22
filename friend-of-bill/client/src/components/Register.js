@@ -48,11 +48,11 @@ const Register = () => {
             console.log(data);
             if(data.err) {
                 dispatch(setMsg({ msg: 'It looks like you already have an account. Please login to continue', err: true }));
-                history.push('/login');
+                history.push('/login');  //Redirect user to login if they already have an account
                 throw new Error('User already registered');
             }
             dispatch(setMsg({ msg: 'You are registered and can now login', err: false }))
-            history.push('/login');
+            history.push('/login'); //Redirect user to login after they successfully register
         }).catch(err => {
             console.log('Error block' , err);
             //this is where I will display message to user

@@ -1,11 +1,11 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, login, selectUser } from "../features/userSlice";
-import { setInventory, clearInventory, selectInventory } from '../features/inventorySlice'
+import { selectUser } from "../features/userSlice";
+import { setInventory, selectInventory } from '../features/inventorySlice'
 import { useHistory, Link } from "react-router-dom";
 import "./Inventory.css";
-
+//Bring in components
 import InventoryForm from "./InventoryForm";
 
 const Inventory = () => {
@@ -62,8 +62,8 @@ const Inventory = () => {
     <div className="inventory">
       <InventoryForm />
       <div className="inventory__card-container">
-      {inventory.map((el, index) => (
-        <div key={index} className="inventory__card">
+      {inventory.map(el => (
+        <div key={el._id} className="inventory__card">
           <div className="inventory__who">Who: {el.who}</div>
           <div className="inventory__why">Why: {el.why}</div>
           <div className="inventory__why">My Part: {el.myPart}</div>

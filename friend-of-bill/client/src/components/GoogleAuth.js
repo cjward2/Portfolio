@@ -47,16 +47,6 @@ const GoogleAuth = () => {
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
             cookiePolicy={'single_host_origin'}/>
-            {/* <GoogleLogin
-    clientId="554136500823-tgqakj8m5elvcl71k0ko3s0qtnc6pokt.apps.googleusercontent.com"
-    render={renderProps => (
-      <button onClick={renderProps.onClick} disabled={renderProps.disabled}>This is my custom Google button</button>
-    )}
-    buttonText="Login"
-    onSuccess={responseGoogle}
-    onFailure={responseGoogle}
-    cookiePolicy={'single_host_origin'}
-  /> */}
         </div>
     )
 }

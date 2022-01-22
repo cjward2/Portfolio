@@ -31,33 +31,34 @@ request('https://aa.org/pages/en_US/daily-reflection', (error, response, html) =
     }
 });
 
+//Get route to send daily reflections to front end
 router.get('/api/dailyReflection', (req, res) => {
     res.json({ dailyReflectionTitle, dailyReflectionP1, dailyReflectionPageNumber, dailyReflectionP2 });
 });
 
+//Get route for user sobriety Date
 router.get('/api/soberdate/:id', (req, res) => {
   //Only display sobriety date for specific user
-  console.log(req.params.id);
   SoberDate.find({ id: req.params.id })
   .then(soberDate => {
-    console.log(soberDate)
-    res.json({ soberDate })
+    res.json({ soberDate })  //Send sober date back to front end
   })
   .catch(err => {
-    console.log(err);
-    res.status(404).json({ msg: 'Error finding Sobriety date' })
+    res.status(404).json({ msg: 'Error finding Sobriety date' });  //In case of an error alert the front end
   })
 });
 
+//Post route for user creating new sober date
 router.post('/api/soberdate', (req, res) => {
     const { user, formData } = req.body;
+    //Create new instance of sobreity date
     let newSoberDate = new SoberDate({
       id: user.id,
       date: formData.soberDate
     });
-    newSoberDate.save()
+    newSoberDate.save()  //Save that instance to DB
     .then(soberDate => {
-      res.json({ soberDate });
+      res.json({ soberDate }); //Then send it back to front end
     }).catch(err => {
       res.status(400).json({ msg: 'Error saving Sober Date', err: true });
     })
