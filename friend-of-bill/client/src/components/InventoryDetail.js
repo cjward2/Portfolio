@@ -1,5 +1,5 @@
 import './InventoryDetail.css';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import InventoryForm from './InventoryForm';
@@ -46,6 +46,7 @@ const InventoryDetail = () => {
     } else {
         return (
             <div className="inventory-detail">
+            <Link className='inventory-detail__back-link' to="/inventory">Back</Link>
                 <h1 className="inventory-detail__header">Inventory Detail</h1>
                 <div className="inventory-detail__who">
                    Who: { inventoryDetail.who }
@@ -77,7 +78,7 @@ const InventoryDetail = () => {
                 <div className="inventory-detail__myPart">
                    My Part: { inventoryDetail.myPart }
                 </div>
-                    <button className="landing__btn btn--green" onClick={ () => setEdit(true) }>Edit</button>
+                    <button className="custom-btn btn--green" onClick={ () => setEdit(true) }>Edit</button>
             </div>
         )
     }

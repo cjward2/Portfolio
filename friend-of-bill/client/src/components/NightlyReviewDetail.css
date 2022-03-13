@@ -1,0 +1,51 @@
+.nightlyReviewDetail {
+  font-size: 20px;
+  margin-top: 40px;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+}
+
+.nightlyReviewQuestions__container {
+  margin-top: 25px;
+}
+
+.nightlyReviewDetail__question {
+  margin-bottom: 10px;
+}
+
+.nightlyReviewDetail__question:not(:first-child) {
+  margin-top: 15px;
+}
+
+.nightlyReview__answer {
+  font-weight: bold;
+}
+
+.nightly-review-link:link,
+.nightly-review-link:visited {
+  text-decoration: none;
+  color: #55c57a;
+  font-size: 18px;
+  display: inline-block;
+  transition: all 0.2s;
+}
+
+.nightly-review-link:hover {
+  transform: translateY(-2px) scale(1.1);
+}
+
+.nightly-review-link:focus {
+  transform: translateY(0px) scale(1);
+}
+
+@media only screen and (max-width: 600px) {
+  .nightlyReviewDetail {
+    padding: 30px 10px;
+  }
+}
+
+@media only screen and (max-width: 486px) {
+  .nightlyReviewDetail {
+    margin-top: 80px;
+  }
+}

@@ -3,17 +3,13 @@
 *::before {
   margin: 0;
   padding: 0;
-  box-sizing: inherit; 
+  box-sizing: inherit;
 }
 
+body,
 html {
-  /* set font-size in html tag and use rem elsewhere as reference to this. Makes media quuries easy. Set as percentage so user can chnnage default font sizew of they wish */
-  font-size: 62.5%;
-}
-
-body {
   /* best practice, but doesn't make huge difference */
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 body {
@@ -22,5 +18,68 @@ body {
   /* font-size: 16px; */
   line-height: 1.7;
   color: #777;
-  padding: 3rem; 
+  padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    padding: 0;
+  }
+}
+
+/* Global Button Styling */
+.custom-btn,
+.custom-btn:link,
+.custom-btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  display: inline-block;
+  /* can add nice rounded corners but just assigning some large number in px to border radius (100px, 200px, 500px) */
+  border-radius: 100px;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  position: relative;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  color: #000;
+}
+
+.custom-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.custom-btn:hover::after {
+  /* scale increases in the element */
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.custom-btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  /* transition goes on intial state */
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+/* Green Button */
+.btn--green {
+  background: #55c57a;
+  color: #fff;
+  padding: 8px 18px;
+  font-size: 14px;
+}
+
+.btn--green::after {
+  background-color: #55c57a;
 }

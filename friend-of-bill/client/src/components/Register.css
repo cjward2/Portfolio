@@ -8,45 +8,36 @@
     url("../assets/img/landing-page-background.jpg");
   background-size: 100%;
   border-radius: 3px;
-  -webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
-  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
-  height: 65vh;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  height: 70vh;
 }
 
 .register__form {
   width: 50%;
-  padding: 6rem;
+  padding: 60px;
 }
 
 .register__form-group:not(:last-child) {
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
 }
 
 .register__form-input {
-  font-size: 1.5rem;
+  font-size: 15px;
   font-family: inherit;
   color: inherit;
-  padding: 1.5rem 2rem;
+  padding: 15px 20px;
   border-radius: 2px;
   background-color: rgba(255, 255, 255, 0.5);
   border: none;
   border-bottom: 3px solid transparent;
   width: 90%;
   display: block;
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
-}
-
-@media only screen and (max-width: 56.25em) {
-  .register__form-input {
-    width: 100%;
-  }
 }
 
 .register__form-input:focus {
   outline: none;
-  -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   border-bottom: 3px solid #55c57a;
 }
 
@@ -63,20 +54,18 @@
 }
 
 .register__form-label {
-  font-size: 1.2rem;
+  font-size: 12px;
   font-weight: 700;
-  margin-left: 2rem;
-  margin-top: 0.7rem;
+  margin-left: 20px;
+  margin-top: 7px;
   display: block;
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
 
 .register__form-input:placeholder-shown + .register__form-label {
   opacity: 0;
   visibility: hidden;
-  -webkit-transform: translateY(-4rem);
-  transform: translateY(-4rem);
+  transform: translateY(-40px);
 }
 
 .register__button-group {
@@ -86,8 +75,8 @@
 .btn--green {
   background: #55c57a;
   color: #fff;
-  padding: 0.8rem 1.8rem;
-  font-size: 1.4rem;
+  padding: 8px 18px;
+  font-size: 14px;
 }
 
 .btn--green::after {
@@ -95,14 +84,14 @@
 }
 
 .register__login-text {
-  font-size: 1.2rem;
+  font-size: 12px;
 }
 
 .register__login-link:link,
 .register__login-link:visited {
   text-decoration: none;
   color: #55c57a;
-  font-size: 1.2rem;
+  font-size: 12px;
   display: inline-block;
   transition: all 0.2s;
 }
@@ -115,7 +104,7 @@
   transform: translateY(0px) scale(1);
 }
 
-@media only screen and (max-width: 75em) {
+@media only screen and (max-width: 1200px) {
   .register {
     background-image: linear-gradient(
         105deg,
@@ -126,9 +115,12 @@
       url("../assets/img/landing-page-background.jpg");
     background-size: cover;
   }
+  .register__form {
+    width: 65%;
+  }
 }
 
-@media only screen and (max-width: 56.25em) {
+@media only screen and (max-width: 900px) {
   .register {
     background-image: -webkit-gradient(
         linear,
@@ -145,23 +137,12 @@
       ),
       url("../assets/img/landing-page-background.jpg");
   }
-}
-
-@media only screen and (max-width: 75em) {
   .register__form {
-    width: 65%;
+    width: 100%;
+    padding: 30px;
   }
-}
 
-@media only screen and (max-width: 56.25em) {
   .register__form-input {
     width: 100%;
-  }
-}
-
-@media only screen and (max-width: 56.25em) {
-  .register__form {
-    width: 100%;
-    padding: 3rem;
   }
 }

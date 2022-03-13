@@ -89,7 +89,7 @@ const Register = () => {
                 <label htmlFor="password2" className="register__form-label">Confirm Password</label>
             </div>
             <div className="register__form-group register__button-group">
-                <button type="submit" className="landing__btn btn--green">Register</button>
+                <button type="submit" className="custom-btn btn--green">Register</button>
                 <GoogleAuth />
             </div>
             <div className="register__login-text">Already have an account? Login <Link className="register__login-link" to="/login">here</Link></div>

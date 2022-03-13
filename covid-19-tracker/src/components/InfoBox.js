@@ -2,6 +2,7 @@ import { Card, CardContent, Typography } from "@material-ui/core";
 import "./InfoBox.css"
 
 const InfoBox = ({ title, cases, active, isRed, total, ...props }) => {
+  console.log(props);
   return (
     //Onclick set casesType to info box clicked(cases, recovered, or deaths).
     //Set CSS using boolean values.

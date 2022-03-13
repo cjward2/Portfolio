@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import './NightlyReviewDetail.css';
 
 const NightlyReviewDetail = () => {
     const params = useParams();  //I want the id from the route to pass into my endpoint
@@ -27,6 +28,7 @@ const NightlyReviewDetail = () => {
             <p>You've completed your nightly review!</p>
             <p>Be careful not to drift into worry, remorse or morbid reflection, for that would diminish our usefulness to others.</p>
             <p>After making our review we ask God's forgiveness and inquire what corrective measures should be taken.</p>
+            <div className="nightlyReviewQuestions__container">
             <div className="nightlyReviewDetail__question">
                 1. When we retire at night, we constructively review our day. Were we resentful?
             </div>
@@ -116,7 +118,8 @@ const NightlyReviewDetail = () => {
                    Description: { review.describe10 === '' ? 'None' : review.describe10 }
                 </div>
             </div>
-            <Link to="/reviews">Nightly Reviews</Link>
+            </div>
+            <Link className='nightly-review-link' to="/reviews">Nightly Reviews</Link>
         </div>
     )
 }

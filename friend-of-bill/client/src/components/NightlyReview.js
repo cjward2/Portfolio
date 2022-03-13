@@ -59,13 +59,13 @@ const NightlyReview = () => {
   return (
     <div className="nightlyReview">
       <h1>Nightly Reviews</h1>
-      <Link className="nightly-review-link inventory__show-form-btn landing__btn btn--green" to="/reviews/new">New Review</Link>
+      <Link className="nightly-review-link custom-btn btn--green" to="/reviews/new">New Review</Link>
       <div className="nightlyReview__container">
       { reviews.map(el => (
             <div className="nightlyReview__card" key={ el._id }>
               { new Date(el.date).toLocaleDateString() }
               <Link className="inventory__detail-link" to={`/review/${el._id}`}>View Details</Link>
-              <button className="inventory__delete-btn landing__btn btn--green" onClick={() => handleDelete(el._id) }>Delete</button>
+              <button className="inventory__delete-btn custom-btn" onClick={() => handleDelete(el._id) }>Delete</button>
             </div>
         ))}
         </div>

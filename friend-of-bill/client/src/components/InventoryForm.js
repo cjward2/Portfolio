@@ -132,6 +132,7 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
           console.log(err);
         });
     }
+    setShowForm(false);
   };
 
   const handleChange = (event) => {
@@ -153,7 +154,7 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
   return (
     <div>
       {/* consitionally display button to user. If they already clicked add new, i dont want them to still see it */}
-      { !showForm &&  <button className="inventory__show-form-btn landing__btn btn--green" onClick={ () => setShowForm(!showForm) }>Add New</button>}
+      { !showForm &&  <button className="inventory__show-form-btn custom-btn btn--green" onClick={ () => setShowForm(!showForm) }>Add New</button>}
       
       { showForm || editForm ? (
         <div className="inventory__form--container">
@@ -285,10 +286,10 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
             </div>
           </div>
           <div className="inventory__form-group">
-            <button type="submit" className="btn--green landing__btn">
+            <button type="submit" className="btn--green custom-btn">
               Save
             </button>
-            <button className="red--btn btn--green landing__btn" onClick={ () => setShowForm(false) }>Cancel</button>
+            <button className="red--btn custom-btn" onClick={ () => setShowForm(false) }>Cancel</button>
           </div>
         </form>
         </div>

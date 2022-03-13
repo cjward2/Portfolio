@@ -11,8 +11,8 @@ const Landing = () => {
                 </h1>
                 </div>
             <div className="landing__button-group">
-                <a className="landing__btn btn--white btn--animated" href="/register">Register</a>
-                <a className="landing__btn btn--white btn--animated" href="/login">Login</a>
+                <a className="custom-btn btn--white btn--animated" href="/register">Register</a>
+                <a className="custom-btn btn--white btn--animated" href="/login">Login</a>
             </div>
             
         </div>

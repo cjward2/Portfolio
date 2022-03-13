@@ -69,7 +69,7 @@ const Inventory = () => {
           <div className="inventory__why">My Part: {el.myPart}</div>
           <div className="inventory__btn-group">
           <Link className="inventory__detail-link" to={`/inventory/${el._id}`}>View Details</Link>
-          <button onClick={ () => handleDelete(el._id) } className="inventory__delete-btn landing__btn btn--green">Delete</button>
+          <button onClick={ () => handleDelete(el._id) } className="inventory__delete-btn custom-btn">Delete</button>
           </div>
         </div>
       ))}

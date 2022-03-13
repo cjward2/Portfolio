@@ -1,37 +1,72 @@
 .inventory-detail {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 150px;
+}
+
+.inventory-detail__back-link:link,
+.inventory-detail__back-link:visited {
+  text-decoration: none;
+  color: #55c57a;
+  font-size: 18px;
+  display: inline-block;
+  transition: all 0.2s;
+  position: absolute;
+  top: 60px;
+  left: 60px;
+}
+
+.inventory-detail__back-link:hover {
+  transform: translateY(-2px) scale(1.1);
+}
+
+.inventory-detail__back-link:focus {
+  transform: translateY(0px) scale(1);
 }
 
 .inventory-detail__header {
-    font-size: 2.8rem;
-    text-align: center;
-    font-family: 'Lato', sans-serif;
-    margin-bottom: 25px;
+  font-size: 28px;
+  text-align: center;
+  font-family: "Lato", sans-serif;
+  margin-bottom: 25px;
 }
 
 .inventory-detail__who,
 .inventory-detail__why {
-    font-size: 1.7rem;
-    padding: 5px;
+  font-size: 17px;
+  padding: 5px;
 }
 
 .inventory-detail__affects {
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin-top: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
 }
 
 .inventory-detail__affects > * {
-    font-size: 1.4rem;
-    font-weight: normal;
-    padding: 5px;
-    text-align: center;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 5px;
+  text-align: center;
 }
 
 .inventory-detail__myPart {
-    font-size: 1.7rem;
-    padding: 5px;
-    margin: 20px 0;
+  font-size: 17px;
+  padding: 5px;
+  margin: 20px 0;
+}
+
+@media (max-width: 900px) {
+  div.inventory-detail a.inventory-detail__back-link {
+    top: 40px;
+    left: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  div.inventory-detail a.inventory-detail__back-link {
+    top: 30px;
+    left: 30px;
+  }
 }

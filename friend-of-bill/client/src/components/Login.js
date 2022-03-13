@@ -76,7 +76,7 @@ const Login = () => {
                 <label htmlFor="password" className="login__form-label">Password</label>
             </div>
             <div className="login__form-group login__button-group">
-                <button type="submit" className="landing__btn btn--green login__btn"><span>Login</span></button>
+                <button type="submit" className="custom-btn btn--green login__btn"><span>Login</span></button>
                 <GoogleAuth />
             </div>
             <div className="login__register-text">Don't have an account? You can register <Link className="login__register-link" to="/register">here</Link></div>

@@ -83,7 +83,7 @@ const SoberDate = () => {
                     <h3 className="soberDate__enter-date-text">Enter your Sobriety Date here:</h3>
                     <form className="soberDate__form-control" onSubmit={ handleSubmit }>
                     <input className="soberDate__sober-input" type="date" name="soberDate" id="soberDate" onChange={ handleChange }/>
-                    <button className="soberDate__form-submit soberDate-btn btn--green landing__btn">Save</button>
+                    <button className="soberDate__form-submit soberDate-btn btn--green custom-btn">Save</button>
                     </form>
                     </div>
                 ) : (
@@ -103,7 +103,7 @@ const SoberDate = () => {
                     <div className="soberDate__soberStats--sober-hours">
                         Hours: { hours }
                     </div>
-                    <button className="soberDate__edit-btn soberDate-btn btn--green landing__btn" onClick={ handleEditClick }>Edit</button>
+                    <button className="soberDate__edit-btn soberDate-btn btn--green custom-btn" onClick={ handleEditClick }>Edit</button>
                 </div>
                 )}
             </div>

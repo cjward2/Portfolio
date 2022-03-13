@@ -11,9 +11,9 @@
 }
 
 input#soberDate {
-    padding: 0.5rem 1rem;
+    padding: 5px 10px;
     border-radius: 100px;
-    font-size: 1.6rem;
+    font-size: 16px;
 }
 
 .soberDate-btn {
@@ -34,16 +34,5 @@ input#soberDate {
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
-    font-size: 2rem;
+    font-size: 20px;
 }
-
-.btn--purple {
-    background: rgba(129, 40, 180);
-    color: #fff;
-    padding: 0.8rem 1.8rem;
-    font-size: 1.4rem;
-  }
-
-.btn--purple::after {
-    background-color: rgba(129, 40, 180);
-  }
