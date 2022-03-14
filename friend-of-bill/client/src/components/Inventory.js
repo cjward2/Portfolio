@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import { setInventory, selectInventory } from '../features/inventorySlice'
@@ -38,8 +38,9 @@ const Inventory = () => {
       });
   }, []);
 
-  const handleDelete = id => {
-    console.log(id);
+  const handleDelete = async id => {
+    const confirm = window.confirm('Are you sure you want to delete this item?');
+    if(confirm) {
     fetch(`/api/inventory/${id}`, {
       method: 'DELETE',
       headers: {
@@ -56,6 +57,7 @@ const Inventory = () => {
     }).catch(err => {
       console.log(err)
     })
+  }
   }
 
   return (

@@ -100,6 +100,11 @@ textarea#myPart {
   padding: 8px 18px;
   font-size: 14px;
   margin-left: 15px;
+  background-color: red;
+}
+
+.red--btn::after {
+  background-color: red;
 }
 
 .inventory__affects-my {
