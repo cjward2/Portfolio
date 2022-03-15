@@ -2,3 +2,12 @@
 .alert-success {
     font-size: 16px;
 }
+
+.marginTop {
+    z-index: 100;
+    position: fixed !important;
+    margin-bottom: 0 !important;
+    bottom: 0;
+    left: 0px;
+    right: 0;
+}

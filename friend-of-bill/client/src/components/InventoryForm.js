@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import { setInventory, selectInventory } from "../features/inventorySlice";
+import { selectMessage, setMsg } from '../features/messageSlice';
 import { useHistory } from "react-router-dom";
 
 import "./InventoryForm.css";
@@ -85,15 +86,16 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
       },
     ];
   }
-    
-
+  
   const [formData, setFormData] = useState(formInitialState);
   const [isChecked, setIsChecked] = useState(checkboxInitialState);
   const [showForm, setShowForm] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(who) {  //If this is true, I know it was passed down from inventory detail screen which means the user wants to edit the form. IN WHICH CASE i want to trigger my put route
+    console.log(event.target);
+    //If this is true, I know it was passed down from inventory detail screen which means the user wants to edit the form. IN WHICH CASE i want to trigger my put route
+    if(who) {
       fetch(`/api/inventory/${id}`, {
         method: "PUT",
         headers: {
@@ -102,11 +104,12 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
         body: JSON.stringify({ formData, isChecked, user })
       }).then(res => {
         if(!res.ok) {
-          throw new Error(`Error getting endpoint`);
+          throw new Error(`Something went wrong when updating this inventory. Please try again later.`);
         }
+        dispatch(setMsg({ msg: 'Inventory sucessfully updated!', err: false }));
         history.push('/inventory'); //If update was successful, send the user back to the inventory page
       }).catch(err => {
-        console.log(err);
+        dispatch(setMsg({ msg: err.message, err: true }));
       })
 
     } else {  //otherwise do my post route
@@ -116,20 +119,20 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ formData, isChecked, user }),
-      }).then((res) => {
+      }).then(res => {
           if (!res.ok) {
-            throw new Error();
+            throw new Error('Something went wrong when trying to add Inventory. Please try again later!');
           }
           return res.json();
         })
-        .then((data) => {
-          console.log(data);
+        .then(data => {
           dispatch(setInventory([data, ...inventory]));
+          dispatch(setMsg({ msg: 'Great job adding some Inventory! Keep it up!', err: false }));
           setFormData(formInitialState);
           setIsChecked(checkboxInitialState);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(err => {
+          dispatch(setMsg({ msg: err.message, err: true }));
         });
     }
     setShowForm(false);
@@ -151,9 +154,18 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
     setIsChecked(checked); //Then set the state to checked
   };
 
+  //Logic for hiding form if user hits cancel
+  const hideForm = (edit) => {
+    setShowForm(false);
+    //If the form was present for editing, send user back to inventory page if they hit cancel
+    if(edit) {
+      history.push('/inventory');
+    }
+  }
+
   return (
     <div>
-      {/* consitionally display button to user. If they already clicked add new, i dont want them to still see it */}
+      {/* conditonally display button to user. If they already clicked add new, i dont want them to still see it */}
       { !showForm &&  <button className="inventory__show-form-btn custom-btn btn--green" onClick={ () => setShowForm(!showForm) }>Add New</button>}
       
       { showForm || editForm ? (
@@ -289,7 +301,7 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
             <button type="submit" className="btn--green custom-btn">
               Save
             </button>
-            <button className="red--btn custom-btn" onClick={ () => setShowForm(false) }>Cancel</button>
+            <button className="red--btn custom-btn" onClick={ (e) => { e.preventDefault(); hideForm(editForm);} }>Cancel</button>
           </div>
         </form>
         </div>
