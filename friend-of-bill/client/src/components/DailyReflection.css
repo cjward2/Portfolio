@@ -4,7 +4,6 @@
 }
 
 .dailyReflection__title {
-    text-align: center;
     font-size: 30px;
     margin-bottom: 15px;
     font-weight: 600;
@@ -23,3 +22,33 @@
 p.dailyReflection__p2 {
     font-size: 20px;
 }
+
+@media only screen and (max-width: 697px) {
+    .dailyReflection__title {
+        font-size: 22px;
+    }
+}
+
+@media only screen and (max-width: 525px) {
+    .dailyReflection {
+        padding: 50px 15px;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .dailyReflection__p1,
+    p.dailyReflection__p2 {
+        font-size: 17px;
+    }
+}
+
+@media only screen and (max-width: 376px) {
+    .dailyReflection-header {
+        font-size: 20px;
+    }
+
+    h3.soberDate__enter-date-text {
+        text-align: center;
+    }
+}
+

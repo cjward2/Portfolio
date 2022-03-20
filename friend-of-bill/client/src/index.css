@@ -83,3 +83,18 @@ body {
 .btn--green::after {
   background-color: #55c57a;
 }
+
+/* Red Button */
+.btn--red {
+  border: none;
+  padding: 8px 18px;
+  border-radius: 100px;
+  background: red;
+  color: #fff;
+  display: inline-block;
+  margin-top: 45px;
+}
+
+.btn--red::after {
+  background: red;
+}

@@ -1,8 +1,15 @@
 .inventory-detail {
+  margin-top: 150px;
+}
+
+.inventory-detail__inner-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 150px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .inventory-detail__back-link:link,
@@ -68,5 +75,9 @@
   div.inventory-detail a.inventory-detail__back-link {
     top: 30px;
     left: 30px;
+  }
+
+  .inventory-detail__inner-container {
+    width: 95%;
   }
 }

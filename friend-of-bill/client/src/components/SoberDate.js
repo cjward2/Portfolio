@@ -89,19 +89,21 @@ const SoberDate = () => {
                 ) : (
                     <div className="soberDate__soberStats-container">
                     <div className="soberDate__soberStats--soberDate">
-                        Great Job! You've been sober since { `${soberDate?.substr(0, 3)} ${soberDate?.substr(8, 3)} ${soberDate?.substr(5, 2)}, ${soberDate?.substr(12, 4)}` }
+                        Great Job! You've been sober since <strong>{ `${soberDate?.substr(0, 3)} ${soberDate?.substr(8, 3)} ${soberDate?.substr(5, 2)}, ${soberDate?.substr(12, 4)}` }</strong>
                     </div>
+                    <div className="soberDate__soberStats--time">
                     <div className="soberDate__soberStats--sober-years">
-                        Years: { years.toFixed(2) }
+                        { years.toFixed(2) } Years
                     </div>
                     <div className="soberDate__soberStats--sober-months">
-                        Months: {(years * 12).toFixed(2) }
+                        {(years * 12).toFixed(2) } Months
                     </div>
                     <div className="soberDate__soberStats--sober-days">
-                        Days: { days }
+                        { days } Days
                     </div>
                     <div className="soberDate__soberStats--sober-hours">
-                        Hours: { hours }
+                        { hours } Hours
+                    </div>
                     </div>
                     <button className="soberDate__edit-btn soberDate-btn btn--green custom-btn" onClick={ handleEditClick }>Edit</button>
                 </div>

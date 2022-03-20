@@ -1,14 +1,21 @@
 .onawakening {
-    margin-top: 60px;
+  margin-top: 60px;
 }
 
 .onawakening > h3 {
-    font-size: 26px;
-    text-align: center;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
 }
 
 p.onawakening__paragraph {
-    font-size: 17px;
+  font-size: 18px;
+  font-family: 'Lato', sans-serif;
+}
+
+@media only screen and (max-width: 600px) {
+  .onawakening {
+    padding: 50px 20px 0px;
+  }
 }

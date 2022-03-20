@@ -25,6 +25,7 @@ const NightlyReviewDetail = () => {
 
     return (
         <div className='nightlyReviewDetail'>
+            <Link className='nightly-review-link' to="/reviews">Back to Nightly Reviews</Link>
             <p>You've completed your nightly review!</p>
             <p>Be careful not to drift into worry, remorse or morbid reflection, for that would diminish our usefulness to others.</p>
             <p>After making our review we ask God's forgiveness and inquire what corrective measures should be taken.</p>
@@ -119,7 +120,6 @@ const NightlyReviewDetail = () => {
                 </div>
             </div>
             </div>
-            <Link className='nightly-review-link' to="/reviews">Nightly Reviews</Link>
         </div>
     )
 }

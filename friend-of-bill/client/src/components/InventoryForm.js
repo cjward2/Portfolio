@@ -297,7 +297,7 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
             <label htmlFor="myPart">Where have I been selfish, dishonest, or afraid?</label>
             </div>
           </div>
-          <div className="inventory__form-group">
+          <div className="inventory__form-group inventory__form-group--btn-group">
             <button type="submit" className="btn--green custom-btn">
               Save
             </button>

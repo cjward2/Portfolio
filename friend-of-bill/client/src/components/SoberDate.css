@@ -36,3 +36,35 @@ input#soberDate {
     margin-right: auto;
     font-size: 20px;
 }
+
+.soberDate__soberStats--time {
+    border: 1px solid #000;
+    border-radius: 3px;
+    padding: 10px 75px;
+    margin-top: 15px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .soberDate__soberStats--time {
+        box-shadow: 0 0px 15px rgb(0 0 0 / 15%);
+    }
+}
+
+@media only screen and (max-width: 706px) {
+    .soberDate {
+        margin-top: 70px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .soberDate {
+        margin-top: 100px;
+    }
+}
+
+@media only screen and (max-width: 486px) {
+    .soberDate__soberStats--soberDate {
+        text-align: center;
+    }
+}
+

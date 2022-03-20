@@ -119,6 +119,10 @@ textarea#myPart {
   margin-left: 15px;
 }
 
+.inventory__form-group input[type="checkbox"] {
+  accent-color: rgba(129, 40, 180);
+}
+
 @media only screen and (max-width: 1200px) {
   .inventory__form {
     width: 65%;
@@ -131,6 +135,23 @@ textarea#myPart {
   }
   .inventory__form {
     width: 100%;
-    padding: 3rem;
+    padding: 30px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  form.inventory__form .inventory__form-group button:first-child {
+    margin: 0;
+  }
+
+  .inventory__form-group--btn-group {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 510px) {
+  form.inventory__form {
+    padding-top: 100px;
   }
 }

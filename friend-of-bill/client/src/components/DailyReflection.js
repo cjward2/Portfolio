@@ -43,7 +43,7 @@ const DailyReflection = () => {
                     {/* I only want to display a daily reviews if they are actually coming back from backend. Im too reliant on a third paty website to potentially not send anything and break the app if this check isnt present */}
                     { dailyReflection.paragraph1 && (
                         <>
-                        <h1>Here is the daily reflection for { todaysDate() }</h1>
+                        <h2 className='dailyReflection-header'>Here is today's daily reflection:</h2>
                         <p className='dailyReflection__title'>{ dailyReflection.title }</p>
                         {/* There is parts of the text from paragraph1 that I dont want like the disclaimer */}
                         <p className="dailyReflection__p1">{ dailyReflection.paragraph1.substr(0, dailyReflection.paragraph1.length - 390) }</p>

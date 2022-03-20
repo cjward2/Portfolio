@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import { setInventory, selectInventory } from '../features/inventorySlice'
@@ -9,8 +9,12 @@ import "./Inventory.css";
 //Bring in components
 import InventoryForm from "./InventoryForm";
 import AlertMessage from "./AlertMessage";
+import DeleteConfirmation from "./DeleteConfirmation";
 
 const Inventory = () => {
+  const [inventoryId, setInventoryId] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
   //Bring in user info from store
   const user = useSelector(selectUser);
   const inventory = useSelector(selectInventory);
@@ -42,8 +46,7 @@ const Inventory = () => {
   }, []);
 
   const handleDelete = id => {
-    const confirm = window.confirm('Are you sure you want to delete this item?');
-    if(confirm) {
+    //const confirm = window.confirm('Are you sure you want to delete this item?');
     fetch(`/api/inventory/${id}`, {
       method: 'DELETE',
       headers: {
@@ -64,12 +67,19 @@ const Inventory = () => {
       //Show user error message
       dispatch(setMsg({ msg: err.message, err: true }))
     })
+    setShowModal(false);
+  
   }
+
+  const showHideDeleteModal = (id) => {
+    setInventoryId(id);
+    setShowModal(!showModal);
   }
 
   return (
     <div className="inventory">
       { message && <AlertMessage marginTop/> }
+      { showModal && <DeleteConfirmation modalVisible={ showModal } showHideDeleteModal={showHideDeleteModal} id={inventoryId} handleDelete={handleDelete} /> }
       <InventoryForm />
       <div className="inventory__card-container">
       {inventory.map(el => (
@@ -79,12 +89,11 @@ const Inventory = () => {
           <div className="inventory__why">My Part: {el.myPart}</div>
           <div className="inventory__btn-group">
           <Link className="inventory__detail-link" to={`/inventory/${el._id}`}>View Details</Link>
-          <button onClick={ () => handleDelete(el._id) } className="inventory__delete-btn custom-btn">Delete</button>
+          <button onClick={ () => showHideDeleteModal(el._id) } className="btn--red inventory__delete-btn custom-btn">Delete</button>
           </div>
         </div>
       ))}
       </div>
-      
     </div>
   );
 };

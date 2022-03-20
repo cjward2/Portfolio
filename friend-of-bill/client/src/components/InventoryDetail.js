@@ -47,6 +47,7 @@ const InventoryDetail = () => {
         return (
             <div className="inventory-detail">
             <Link className='inventory-detail__back-link' to="/inventory">Back</Link>
+                <div className="inventory-detail__inner-container">
                 <h1 className="inventory-detail__header">Inventory Detail</h1>
                 <div className="inventory-detail__who">
                    Who: { inventoryDetail.who }
@@ -79,6 +80,7 @@ const InventoryDetail = () => {
                    My Part: { inventoryDetail.myPart }
                 </div>
                     <button className="custom-btn btn--green" onClick={ () => setEdit(true) }>Edit</button>
+                    </div>
             </div>
         )
     }

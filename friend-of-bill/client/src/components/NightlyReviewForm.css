@@ -101,3 +101,16 @@ button.nightlyReview-btn {
   border: none;
   border-radius: 100px;
 }
+
+@media only screen and (max-width: 1000px) {
+  .nightlyReview__form {
+    width: 95%;
+    margin-top: 100px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .nightlyReview__form {
+    margin-top: 120px;
+  }
+}

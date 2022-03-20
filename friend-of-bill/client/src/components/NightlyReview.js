@@ -8,10 +8,13 @@ import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 
 import AlertMessage from "./AlertMessage";
+import DeleteConfirmation from "./DeleteConfirmation";
 import "./NightlyReview.css";
 
 const NightlyReview = () => {
     const [reviews, setReviews] = useState([]);
+    const [reviewId, setReviewId] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
   //Bring in user info from store
   const user = useSelector(selectUser);
@@ -44,8 +47,6 @@ const NightlyReview = () => {
   }, []);
 
  const handleDelete = id => {
-  const confirm = window.confirm('Are you sure you want to delete this item?');
-  if(confirm) {
    fetch(`/api/reviews/${id}`, {
      method: "DELETE",
      headers: {
@@ -62,20 +63,26 @@ const NightlyReview = () => {
     dispatch(setMsg({ msg: 'Nightly Review sucessfully deleted!', err: false }));
    }).catch(err => {
     dispatch(setMsg({ msg: err.message, err: true }))
-   })
-  }
+   });
+   setShowModal(false);
+ }
+
+ const showHideDeleteModal = id => {
+  setReviewId(id);
+  setShowModal(!showModal);
  }
 
   return (
     <div className="nightlyReview">
       { message && <AlertMessage marginTop/> }
+      { showModal && <DeleteConfirmation modalVisible={ showModal } showHideDeleteModal={showHideDeleteModal} id={reviewId} handleDelete={handleDelete} /> }
       <Link className="nightly-review-link custom-btn btn--green" to="/reviews/new">New Review</Link>
       <div className="nightlyReview__container">
       { reviews.map(el => (
             <div className="nightlyReview__card" key={ el._id }>
               { new Date(el.date).toLocaleDateString() }
               <Link className="inventory__detail-link" to={`/review/${el._id}`}>View Details</Link>
-              <button className="inventory__delete-btn custom-btn" onClick={() => handleDelete(el._id) }>Delete</button>
+              <button className="btn--red custom-btn" onClick={() => showHideDeleteModal(el._id) }>Delete</button>
             </div>
         ))}
         </div>
