@@ -1,15 +1,15 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "../features/userSlice";
-import { setInventory, selectInventory } from '../features/inventorySlice'
-import { selectMessage, setMsg } from '../features/messageSlice';
+import { selectUser } from "../../features/userSlice";
+import { setInventory, selectInventory } from '../../features/inventorySlice'
+import { selectMessage, setMsg } from '../../features/messageSlice';
 import { useHistory, Link } from "react-router-dom";
 import "./Inventory.css";
 //Bring in components
-import InventoryForm from "./InventoryForm";
-import AlertMessage from "./AlertMessage";
-import DeleteConfirmation from "./DeleteConfirmation";
+import InventoryForm from "../InventoryForm";
+import AlertMessage from "../AlertMessage";
+import DeleteConfirmation from "../DeleteConfirmation";
 
 const Inventory = () => {
   const [inventoryId, setInventoryId] = useState(null);

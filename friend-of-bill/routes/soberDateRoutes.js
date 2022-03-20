@@ -44,7 +44,8 @@ router.get('/api/soberdate/:id', (req, res) => {
     res.json({ soberDate })  //Send sober date back to front end
   })
   .catch(err => {
-    res.status(404).json({ msg: 'Error finding Sobriety date' });  //In case of an error alert the front end
+    //In case of an error alert the front end
+    res.status(404).json({ msg: 'Error finding Sobriety date' });
   })
 });
 

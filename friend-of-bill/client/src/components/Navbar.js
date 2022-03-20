@@ -13,7 +13,7 @@ const Navbar = () => {
 
 
     const handleClick = () => {
-        document.querySelector('input#navi-toggle').checked = false;  //I built my navbar witha checkbox using the :checked pseudoselector. To ensure it close afdter user clicks a link, set checked to false
+        document.querySelector('input#navi-toggle').checked = false;  //I built my navbar with a checkbox using the :checked pseudoselector. To ensure it close afdter user clicks a link, set checked to false
     }
 
     const handleLogout = () => {
@@ -40,7 +40,7 @@ const Navbar = () => {
                     <li className="navigation__item"><Link onClick={ handleClick } to="/inventory" className="navigation__link"><span>02</span>Inventory</Link></li>
                     <li className="navigation__item"><Link onClick={ handleClick } to="/reviews" className="navigation__link"><span>03</span>Nightly Reviews</Link></li>
                     <li className="navigation__item"><Link onClick={ handleClick } to="/awakening" className="navigation__link"><span>04</span>Upon Awakening</Link></li>
-                    <li className="navigation__item"><Link onClick={ handleClick } to="/login" className="navigation__link"><span>05</span>ChatRoom</Link></li>
+                    <li className="navigation__item"><Link onClick={ handleClick } to="/chatroom" className="navigation__link"><span>05</span>ChatRoom</Link></li>
                     <li className="navigation__item navigation__link"><Link onClick={ handleLogout } to="#" className="navigation__link"><span>06</span>Logout</Link></li>
                 </ul>
             </nav>

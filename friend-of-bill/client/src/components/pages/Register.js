@@ -2,9 +2,9 @@ import React from 'react'
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setMsg, selectMessage } from '../features/messageSlice';
-import AlertMessage from './AlertMessage';
-import GoogleAuth from './GoogleAuth';
+import { setMsg, selectMessage } from '../../features/messageSlice';
+import AlertMessage from '../AlertMessage';
+import GoogleAuth from '../GoogleAuth';
 
 import './Register.css';
 

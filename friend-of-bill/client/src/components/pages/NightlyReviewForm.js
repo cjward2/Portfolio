@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import { selectUser } from "../features/userSlice";
+import { selectUser } from "../../features/userSlice";
 import './NightlyReviewForm.css'
 import 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';

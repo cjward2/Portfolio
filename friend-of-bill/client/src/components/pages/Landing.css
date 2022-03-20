@@ -5,7 +5,7 @@
       rgba(142, 111, 213, 0.8),
       rgba(129, 40, 180, 0.8)
     ),
-    url("../assets/img/landing-page-background.jpg");
+    url("../../assets/img/landing-page-background.jpg");
   background-size: cover;
   background-position: center;
   clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
@@ -152,7 +152,8 @@
 }
 
 @media only screen and (max-width: 885px) {
-  .heading-primary--main, .heading-primary--sub {
+  .heading-primary--main,
+  .heading-primary--sub {
     letter-spacing: 1.5px;
   }
 
@@ -162,29 +163,36 @@
 
   .heading-primary--sub {
     font-size: 16px;
-}
+  }
 }
 
 @media only screen and (max-width: 457px) {
   .heading-primary--main {
     font-size: 30px;
-}
-.heading-primary--main, .heading-primary--sub {
-  letter-spacing: 1px;
-}
-.landing {
-  background-position: left;
-}
+  }
+  .heading-primary--main,
+  .heading-primary--sub {
+    letter-spacing: 1px;
+  }
+  .landing {
+    background-position: left;
+  }
+
+  .landing__button-group a.custom-btn.btn--white.btn--animated {
+    font-size: 14px;
+  }
 }
 
-@media only screen and (max-width: 362px) {
+@media only screen and (max-width: 375px) {
   .heading-primary--main {
     font-size: 24px;
-}
+  }
 
   .heading-primary--sub {
     font-size: 14px;
-}
-}
+  }
 
-
+  .landing__button-group a.custom-btn.btn--white.btn--animated {
+    font-size: 12px;
+  }
+}

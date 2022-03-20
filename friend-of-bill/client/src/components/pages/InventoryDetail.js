@@ -2,7 +2,7 @@ import './InventoryDetail.css';
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import InventoryForm from './InventoryForm';
+import InventoryForm from '../InventoryForm';
 
 const InventoryDetail = () => {
     const [inventoryDetail, setInventoryDetail] = useState({});

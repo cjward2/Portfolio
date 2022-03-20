@@ -13,7 +13,6 @@ router.post('/api/login',
     console.log(req.body.email);
     User.findOne({email: req.body.email})
     .then(user => {
-
         console.log(user);
         res.json({ userID: user._id, name: user.name, err: false });
     })

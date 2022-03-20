@@ -1,14 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectUser } from "../features/userSlice";
+import { selectUser } from "../../features/userSlice";
 import { useDispatch } from "react-redux";
-import { selectMessage, setMsg } from '../features/messageSlice';
+import { selectMessage, setMsg } from '../../features/messageSlice';
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 
-import AlertMessage from "./AlertMessage";
-import DeleteConfirmation from "./DeleteConfirmation";
+import AlertMessage from "../AlertMessage";
+import DeleteConfirmation from "../DeleteConfirmation";
 import "./NightlyReview.css";
 
 const NightlyReview = () => {
@@ -31,18 +31,17 @@ const NightlyReview = () => {
     fetch(`/api/reviews/${user.id}`)
       .then((res) => {
         if (!res.ok) {
-          throw new Error(`Error making fetch`);
+          throw new Error(`Something went wrong while grabbing your nightly reviews. Please Try again later.`);
         }
         return res.json();
       })
       .then((data) => {
-        console.log(data.review);
         //I want the most recent review to be first for the user. Easiest way to do that for me way to just reverse the array being sent from my backend
         setReviews(data.review.reverse());
       })
       .catch((err) => {
         //this is where I will display message to user
-        console.log("Error block", err);
+        dispatch(setMsg({ msg: err.message, err: true }))
       });
   }, []);
 
