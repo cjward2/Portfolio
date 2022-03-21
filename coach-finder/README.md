@@ -1,5 +1,5 @@
 # Coach Finder App
-- A coach finder app built using Vue.js and Vuex.
+- A coach finder app built using Vue.js, Vuex, and Firebase.
 
 You can find a live version of this build [**Here**](https://coach-finder-f5223.web.app)
 
