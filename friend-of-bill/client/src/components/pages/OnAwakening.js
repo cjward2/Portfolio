@@ -1,7 +1,23 @@
-import React from 'react'
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../../features/userSlice";
+import { setMsg } from "../../features/messageSlice";
+import { useHistory } from "react-router-dom";
 import './OnAwakening.css';
 
 const OnAwakening = () => {
+  //Bring in user info from store
+  const user = useSelector(selectUser);
+  const history = useHistory();
+
+  const dispatch = useDispatch();
+  //Run use Effect when component mounts
+
+  //Run this outside useEffect for slow internet speeds. for fast internet, useEffect fires with the request before redirect, which shows wrong message to user
+  if (user.id === undefined) { 
+    dispatch(setMsg({ msg: "Please login to view this page", err: true }));
+    history.push("/login");
+}
+
     return (
         <div className="onawakening">
             <h3>On Awakening</h3>

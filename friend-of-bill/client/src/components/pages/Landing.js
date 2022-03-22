@@ -1,4 +1,3 @@
-import React from 'react';
 import './Landing.css';
 
 const Landing = () => {
@@ -7,7 +6,7 @@ const Landing = () => {
             <div className="header__text-box">
                 <h1 className="heading-primary">
                     <span className="heading-primary--main">Welcome Friend of Bill</span>
-                    <span class="heading-primary--sub">You don't have to suffer anymore</span>
+                    <span className="heading-primary--sub">You don't have to suffer anymore</span>
                 </h1>
                 </div>
             <div className="landing__button-group">

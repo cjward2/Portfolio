@@ -1,9 +1,10 @@
-import React from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from "../../features/userSlice";
 import { selectMessage, setMsg } from '../../features/messageSlice';
 import { useHistory, Link } from 'react-router-dom';
+import { makeRequest } from '../../util';
+
 import AlertMessage from '../AlertMessage';
 import GoogleAuth from '../GoogleAuth';
 import './Login.css';
@@ -21,36 +22,20 @@ const Login = () => {
 
     const [formData, setFormData] = useState(initialState);
 
-    const handleSubmit = event => {
-        console.log('submit');
+    const handleSubmit = async event => {
         //prevent default action of form
         event.preventDefault();
-
-        fetch('/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        }).then(res => {
-            if(!res.ok) {
-                throw new Error(`Incorrect credentials`);
+            try {
+                const data = await makeRequest('/api/login', 'POST', { body: JSON.stringify(formData) });
+                //Store users info in session storage so state can persist across refresh
+                window.sessionStorage.userID = data.userID;
+                window.sessionStorage.name = data.name;
+                dispatch(login({ id: data.userID, name: data.name }));
+                history.push('/dashboard');
+            } catch(error) {
+                //If authentication is not passed, display message for user
+                dispatch(setMsg({ msg: 'Invalid Credentials', err: true }));
             }
-            return res.json();
-        }).then(data => {
-            if(data.err) {
-                throw new Error('Error while logging in');
-            }
-            console.log(data);
-            //Store users info in session storage so state can persist across refresh
-            window.sessionStorage.userID = data.userID;
-            window.sessionStorage.name = data.name;
-            dispatch(login({ id: data.userID, name: data.name }));
-            history.push('/dashboard');
-        }).catch(err => {
-            console.log('Error block' , err);
-            dispatch(setMsg({ msg: 'Invalid Credentials', err: true })); //If authentication is not passed, display message for user
-        });
         //Reset form data
         setFormData(initialState);
     }

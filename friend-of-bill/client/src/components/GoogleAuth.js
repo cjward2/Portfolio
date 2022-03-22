@@ -3,39 +3,29 @@ import { GoogleLogin } from 'react-google-login';
 import { login } from "../features/userSlice";
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { setMsg } from '../features/messageSlice';
 
 import './GoogleAuth.css';
+import { makeRequest } from '../util';
 
 const GoogleAuth = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const responseGoogle = (response) => {
-        // console.log(response);
-        if(response.error) {  //If user closes popup, dont send request to backend
+    const responseGoogle = async response => {
+        //If user closes popup, dont send request to backend
+        if(response.error) {  
             return;
         }
-        fetch('/api/google/auth', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(response.profileObj)
-        }).then(res => {
-            if(!res.ok) {
-                throw new Error('Error getting enpoint')
-            }
-            return res.json();
-        }).then(data => {
-            console.log(data);
+        try {
+            const data = await makeRequest('/api/google/auth', 'POST', { body: JSON.stringify(response.profileObj) });
             window.sessionStorage.userID = data._id;
             window.sessionStorage.name = data.name;
             dispatch(login({ id: data._id, name: data.name }));
             history.push('/dashboard');
-
-        }).catch(err => {
-            console.log(err);
-        })
+        } catch(error) {
+            dispatch(setMsg({ msg: 'Something went wrong when try to login. Please try again later.', err: true }));
+        }
       }
 
     return (

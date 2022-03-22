@@ -1,10 +1,10 @@
-import React from 'react'
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMsg, selectMessage } from '../../features/messageSlice';
 import AlertMessage from '../AlertMessage';
 import GoogleAuth from '../GoogleAuth';
+import { makeRequest } from '../../util';
 
 import './Register.css';
 
@@ -22,8 +22,7 @@ const Register = () => {
     const dispatch = useDispatch();
     const message = useSelector(selectMessage);
 
-    const handleSubmit = event => {
-        console.log('submit');
+    const handleSubmit = async event => {
         //prevent default action of form
         event.preventDefault();
         if(formData.password1 !== formData.password2) {
@@ -33,30 +32,19 @@ const Register = () => {
             dispatch(setMsg({ msg: 'Password must be at least 6 characters long', err: true }));
             return;
         }
-        fetch('/api/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        }).then(res => {
-            if(!res.ok) {
-                throw new Error()
-            }
-            return res.json();
-        }).then(data => {
-            console.log(data);
+        try {
+            const data = await makeRequest('/api/register', 'POST', { body: JSON.stringify(formData) });
             if(data.err) {
+                //user already has an account
                 dispatch(setMsg({ msg: 'It looks like you already have an account. Please login to continue', err: true }));
                 history.push('/login');  //Redirect user to login if they already have an account
-                throw new Error('User already registered');
+                return;
             }
             dispatch(setMsg({ msg: 'You are registered and can now login', err: false }))
             history.push('/login'); //Redirect user to login after they successfully register
-        }).catch(err => {
-            console.log('Error block' , err);
-            //this is where I will display message to user
-        });
+        } catch(error) {
+            dispatch(setMsg({ msg: 'Something went wrong. Please try again later.', err: true }));
+        }
         //Reset form data
         setFormData(initialState);
     }

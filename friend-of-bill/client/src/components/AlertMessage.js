@@ -1,8 +1,6 @@
-import React from "react";
 import { clearMsg, selectMessage } from '../features/messageSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import './AlertMessage.css';
-
 
 const AlertMessage = ({marginTop}) => {
   //Bring in message state from store b/c I want to dynamically display messages for the user throughout the application

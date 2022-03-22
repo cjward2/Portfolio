@@ -1,29 +1,32 @@
-import './InventoryDetail.css';
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { selectMessage, setMsg } from '../../features/messageSlice';
+import { useDispatch, useSelector } from "react-redux";
+import { makeRequest } from '../../util'; 
 
+import './InventoryDetail.css';
 import InventoryForm from '../InventoryForm';
+import AlertMessage from '../AlertMessage';
 
 const InventoryDetail = () => {
     const [inventoryDetail, setInventoryDetail] = useState({});
     const [edit, setEdit] = useState(false); //Use edit state to determine if form will be show to editinventory
 
-    const id = useParams(); //Get id from route params to make call to backend for this specific id.
-    console.log(id)
+    const dispatch = useDispatch();
+    const message = useSelector(selectMessage);
+
+    //Get id from route params to make call to backend for this specific id.
+    const id = useParams();
     useEffect(() => {
-        fetch(`/api/inventory/${id.id}`)
-        .then(res => {
-            if(!res.ok) {
-                throw new Error(`Error getting endpoint`)
+        const fetchRequest = async () => {
+            try {
+                const data = await makeRequest(`/api/inventory/${id.id}`);
+                setInventoryDetail(data);
+            } catch(error) {
+                dispatch(setMsg({ msg: 'Something went wrong. Please try again later.', err: true }));
             }
-            return res.json();
-        }).then(data => {
-            console.log(data);
-            setInventoryDetail(data);
-        }).catch(err => {
-            console.log(err);
-        })
-           
+        }
+        fetchRequest();       
     }, []);
 
     if(edit) {
@@ -47,6 +50,7 @@ const InventoryDetail = () => {
         return (
             <div className="inventory-detail">
             <Link className='inventory-detail__back-link' to="/inventory">Back</Link>
+            { message && <AlertMessage marginTop /> }
                 <div className="inventory-detail__inner-container">
                 <h1 className="inventory-detail__header">Inventory Detail</h1>
                 <div className="inventory-detail__who">
@@ -57,25 +61,26 @@ const InventoryDetail = () => {
                 </div>
                 <div className="inventory-detail__affects">
                     This affected my:
-                    <div>
-                    { inventoryDetail.fear !== 'false' && 'Fear' }
-                    </div>
-                    <div>
-                    { inventoryDetail.selfEsteem !== 'false' && 'Self-Esteem' }
-                    </div>
-                    <div>
-                    { inventoryDetail.security !== 'false' && 'Security' }
-                    </div>
-                    <div>
-                    { inventoryDetail.personalRelationship !== 'false' && 'Personal Relationship' }
-                    </div>
-                    <div>
-                    { inventoryDetail.sexRelations !== 'false' && 'Sex Relations' }
-                    </div>
-                    <div>
-                    { inventoryDetail.pride !== 'false' && 'Pride' }
-                    </div>
+                    { inventoryDetail.fear !== 'false' && (
+                       <div>Fear</div>
+                    ) }
+                    { inventoryDetail.selfEsteem !== 'false' && (
+                        <div>Self-Esteem</div>
+                    ) }
+                    { inventoryDetail.security !== 'false' && (
+                        <div>Security</div>
+                    ) }
+                    { inventoryDetail.personalRelationship !== 'false' && (
+                        <div>Personal Relations</div>
+                    ) }
+                    { inventoryDetail.sexRelations !== 'false' && (
+                        <div>Sex Relations</div>
+                    ) }
+                    { inventoryDetail.pride !== 'false' && (
+                        <div>Pride</div>
+                    ) }
                 </div>
+                { inventoryDetail.myPart }
                 <div className="inventory-detail__myPart">
                    My Part: { inventoryDetail.myPart }
                 </div>

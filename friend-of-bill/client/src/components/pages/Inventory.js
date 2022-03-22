@@ -1,11 +1,12 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../features/userSlice";
 import { setInventory, selectInventory } from '../../features/inventorySlice'
 import { selectMessage, setMsg } from '../../features/messageSlice';
 import { useHistory, Link } from "react-router-dom";
+import { makeRequest } from '../../util';
 import "./Inventory.css";
+
 //Bring in components
 import InventoryForm from "../InventoryForm";
 import AlertMessage from "../AlertMessage";
@@ -24,51 +25,36 @@ const Inventory = () => {
 
   //if no user is logged in, redirect them back to login page
   if (user.id === undefined) {
+    dispatch(setMsg({ msg: "Please login to view this page", err: true }));
     history.push("/login");
   }
 
   useEffect(() => {
-    fetch(`/api/inventories/${user.id}`)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`Something went wrong when grabbing your inventory. Please try again later.`);
+      const getRequest = async () => {
+        try {
+          const data = await makeRequest(`/api/inventories/${user.id}`);
+          //Set inventory state in store in reverse order so most recent inventory will be at top for user
+          dispatch(setInventory(data.inventory.reverse()));
+        } catch(error) {
+          //this is where I will display message to user
+          dispatch(setMsg({ msg: 'Something went wrong when grabbing your inventory. Please try again later.', err: true }));
         }
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        dispatch(setInventory(data.inventory.reverse())); //Set inventory state in store in reverse order so most recent inventory will be at top for user
-      })
-      .catch(err => {
-        //this is where I will display message to user
-        dispatch(setMsg({ msg: err.message, err: true }))
-      });
+      }
+      getRequest();
   }, []);
 
-  const handleDelete = id => {
-    //const confirm = window.confirm('Are you sure you want to delete this item?');
-    fetch(`/api/inventory/${id}`, {
-      method: 'DELETE',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(user)
-    }).then(res => {
-      if(!res.ok) {
-        throw new Error(`Error deleting inventory. Please try again later.`)
+  const handleDelete = async id => {
+      try {
+        const data = await makeRequest(`/api/inventory/${id}`, 'DELETE', { body: JSON.stringify(user) });
+        //Set inventory state in store in reverse order so most recent inventory will be at top for user
+        dispatch(setInventory(data.inventory.reverse()));
+        //Show sucess message to user
+        dispatch(setMsg({ msg: 'Inventory sucessfully deleted!', err: false }));
+      } catch(error) {
+        //Show user error message
+        dispatch(setMsg({ msg: 'Error deleting inventory. Please try again later.', err: true }));
       }
-      return res.json();
-    }).then(data => {
-      //Set inventory state in store in reverse order so most recent inventory will be at top for user
-      dispatch(setInventory(data.inventory.reverse()));
-      //Show sucess message to user
-      dispatch(setMsg({ msg: 'Inventory sucessfully deleted!', err: false }));
-    }).catch(err => {
-      //Show user error message
-      dispatch(setMsg({ msg: err.message, err: true }))
-    })
     setShowModal(false);
-  
   }
 
   const showHideDeleteModal = (id) => {

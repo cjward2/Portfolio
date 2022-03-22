@@ -10,15 +10,12 @@ const User = require('../models/users');
 router.post('/api/login', 
   passport.authenticate('local'),
   function(req, res) {
-    console.log(req.body.email);
     User.findOne({email: req.body.email})
     .then(user => {
-        console.log(user);
         res.json({ userID: user._id, name: user.name, err: false });
     })
     .catch(err => {
-      console.log(err);
-      res.json({ msg: 'An error occured while logging in', err: true });
+      res.status(400).json({ msg: 'An error occured while logging in', err: true });
     });
   });
 
@@ -44,13 +41,11 @@ router.post('/api/register', (req, res) => {
         //Save User
         newUser.save()
         .then(user => {
-            console.log(user);
             //If user is saved with hashed password tell the front end
             res.json({ msg: 'User saved', err: false });
         })
         .catch(error => {
-          console.log('Error hasing password', error);
-          res.json({ msg: 'Error hashing password', err: true });
+          res.status(400).json({ msg: 'Error hashing password', err: true });
         });
     }));
       }
@@ -76,7 +71,6 @@ router.post('/api/google/auth', (req, res) => {
       .then(user => {
         res.json(user);
       }).catch(err => {
-        console.log(err);
         res.status(400).json({ msg: 'Error saving google User', err: true })
       })
     }

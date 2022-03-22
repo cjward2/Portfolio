@@ -1,10 +1,7 @@
-import { useState } from 'react';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
-
 import './DeleteConfirmation.css'
 
 const DeleteConfirmation = ({ modalVisible, showHideDeleteModal, id, handleDelete }) => {
-
   return (
     <Modal isOpen={ modalVisible } toggle={ () => showHideDeleteModal() }>
     <ModalHeader>

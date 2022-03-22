@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import { setMsg } from '../features/messageSlice';
+import { useDispatch } from "react-redux";
+import { makeRequest } from '../util';
 import './DailyReflection.css';
 
 const DailyReflection = () => {
@@ -10,32 +13,24 @@ const DailyReflection = () => {
     }
 
     const [dailyReflection, setDailyReflection] = useState(dailyReflectionInitialState);
-
+    const dispatch = useDispatch();
     //Run use Effect when component mounts
     useEffect(() => {
-        fetch('/api/dailyReflection')
-        .then(res => {
-            if(!res.ok) {
-                throw new Error(`Error getting endpoint`)
+        const getRequest = async () => {
+            try {
+                const data = await makeRequest('/api/dailyReflection');
+                setDailyReflection({ 
+                    title: data.dailyReflectionTitle,
+                    pageNumber: data.dailyReflectionPageNumber,
+                    paragraph1: data.dailyReflectionP1,
+                    paragraph2: data.dailyReflectionP2
+                 });
+            } catch(error) {
+                dispatch(setMsg({ msg: `Something went wrong when grabbing today's daily reflection. Please try again later.`, err: true }));
             }
-            return res.json();
-        }).then(data => {
-            setDailyReflection({ 
-                title: data.dailyReflectionTitle,
-                pageNumber: data.dailyReflectionPageNumber,
-                paragraph1: data.dailyReflectionP1,
-                paragraph2: data.dailyReflectionP2
-             });
-        }).catch(err => {
-            console.log(err);
-        })
+        }
+        getRequest();
     }, []);
-
-    const todaysDate = () => {
-       const todayArray = new Date().toString().split(' ');
-       const rearrangedDate = `${todayArray[0]}day ${todayArray[1]} ${todayArray[2]}`;
-       return rearrangedDate;
-    }
 
     return (
         <div className="dailyReflection">

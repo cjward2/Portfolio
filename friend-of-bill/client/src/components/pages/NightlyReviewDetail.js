@@ -1,31 +1,50 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { selectMessage, setMsg } from '../../features/messageSlice';
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../../features/userSlice";
+import { useHistory } from "react-router-dom";
+import { makeRequest } from '../../util';
+
 import './NightlyReviewDetail.css';
+import AlertMessage from "../AlertMessage";
 
 const NightlyReviewDetail = () => {
-    const params = useParams();  //I want the id from the route to pass into my endpoint
-
     const [review, setReview] = useState({});
 
+    const user = useSelector(selectUser);
+    const params = useParams();  //I want the id from the route to pass into my endpoint
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const message = useSelector(selectMessage);
+
+    if (user.id === undefined) { 
+        dispatch(setMsg({ msg: "Please login to view this page", err: true }));
+        history.push("/login");
+    }
+
     useEffect(() => {
-       fetch(`/api/review/${params.id}`)
-       .then(res => {
-           if(!res.ok) {
-               throw new Error('Error getting reviews enpoint');
-           }
-           return res.json()
-       }).then(data => {
-           setReview(data.review);
-           console.log(data.review);
-       }).catch(err => {
-           console.log(err)
-       })
+        const getRequest = async () => {
+            try {
+                const data = await makeRequest(`/api/review/${params.id}`);
+                setReview(data.review);
+            } catch(error) {
+                if (user.id === undefined) { 
+                    dispatch(setMsg({ msg: "Please login to view this page", err: true }));
+                    history.push("/login");
+                } else {
+                    dispatch(setMsg({ msg: 'Something went wrong. Please try again later.', err: true }));
+                }
+            }
+        }
+        getRequest();
     }, []);
 
     return (
         <div className='nightlyReviewDetail'>
             <Link className='nightly-review-link' to="/reviews">Back to Nightly Reviews</Link>
+            { message && <AlertMessage marginTop/> }
             <p>You've completed your nightly review!</p>
             <p>Be careful not to drift into worry, remorse or morbid reflection, for that would diminish our usefulness to others.</p>
             <p>After making our review we ask God's forgiveness and inquire what corrective measures should be taken.</p>

@@ -1,15 +1,22 @@
 import { useState } from "react";
 import { useHistory } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setMsg } from '../../features/messageSlice';
 import { selectUser } from "../../features/userSlice";
-import './NightlyReviewForm.css'
-import 'react-bootstrap';
+import { makeRequest } from "../../util";
+import './NightlyReviewForm.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const NightlyReviewForm = () => {
   const history = useHistory();
   const user = useSelector(selectUser);
-  console.log(user);
+  const dispatch = useDispatch();
+
+  if (user.id === undefined) { 
+    dispatch(setMsg({ msg: "Please login to view this page", err: true }));
+    history.push("/login");
+  }
 
     const initialFormState = {
         describe1: "",
@@ -62,9 +69,7 @@ const NightlyReviewForm = () => {
         checked: false
       },
     ];
-      
-    
-
+ 
     const [formData, setFormData] = useState(initialFormState);
     const [checkbox, setCheckbox] = useState(initialCheckboxState)
 
@@ -82,27 +87,16 @@ const NightlyReviewForm = () => {
       setCheckbox(checked);
     }
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
       event.preventDefault();
-      fetch("/api/reviews/new", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ formData, checkbox, user }),
-      }).then((res) => {
-          if (!res.ok) {
-            throw new Error('Error getting reviews endpoint');
-          }
-          return res.json();
-        })
-        .then((data) => {
-          history.push(`/review/${data.review._id}`);
-          console.log(data.review);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      try {
+        const data = await makeRequest('/api/reviews/new', 'POST', { body: JSON.stringify({ formData, checkbox, user }) });
+        history.push(`/review/${data.review._id}`);
+      } catch(error) {
+        dispatch(setMsg({ msg: 'Something went wrong when saving your review. Please try again later.', err: true }));
+        //If something goews wrong set the message in the store and display on redirect for user
+        history.push('/reviews');
+      }
     }
 
   return (

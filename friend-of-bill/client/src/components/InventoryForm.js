@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import { setInventory, selectInventory } from "../features/inventorySlice";
-import { selectMessage, setMsg } from '../features/messageSlice';
+import { setMsg } from '../features/messageSlice';
 import { useHistory } from "react-router-dom";
+import { makeRequest } from "../util";
 
 import "./InventoryForm.css";
 
@@ -91,50 +92,42 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
   const [isChecked, setIsChecked] = useState(checkboxInitialState);
   const [showForm, setShowForm] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async event => {
     event.preventDefault();
-    console.log(event.target);
+    let endpoint;
+    let method;
+    let settings;
     //If this is true, I know it was passed down from inventory detail screen which means the user wants to edit the form. IN WHICH CASE i want to trigger my put route
     if(who) {
-      fetch(`/api/inventory/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ formData, isChecked, user })
-      }).then(res => {
-        if(!res.ok) {
-          throw new Error(`Something went wrong when updating this inventory. Please try again later.`);
-        }
-        dispatch(setMsg({ msg: 'Inventory sucessfully updated!', err: false }));
-        history.push('/inventory'); //If update was successful, send the user back to the inventory page
-      }).catch(err => {
-        dispatch(setMsg({ msg: err.message, err: true }));
-      })
+      endpoint = `/api/inventory/${id}`;
+      method = 'PUT';
+      settings = { body: JSON.stringify({ formData, isChecked, user }) };
+    } else {
+      //otherwise do my post route
+      endpoint = "/api/inventory/new";
+      method = 'POST';
+      settings = { body: JSON.stringify({ formData, isChecked, user }) };
+    }
 
-    } else {  //otherwise do my post route
-      fetch("/api/inventory/new", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ formData, isChecked, user }),
-      }).then(res => {
-          if (!res.ok) {
-            throw new Error('Something went wrong when trying to add Inventory. Please try again later!');
-          }
-          return res.json();
-        })
-        .then(data => {
+      try {
+        const data = await makeRequest(endpoint, method, settings);
+        if(method === 'PUT') {
+          dispatch(setMsg({ msg: 'Inventory sucessfully updated!', err: false }));
+          //If update was successful, send the user back to the inventory page
+          history.push('/inventory');
+        } else {
           dispatch(setInventory([data, ...inventory]));
           dispatch(setMsg({ msg: 'Great job adding some Inventory! Keep it up!', err: false }));
           setFormData(formInitialState);
           setIsChecked(checkboxInitialState);
-        })
-        .catch(err => {
-          dispatch(setMsg({ msg: err.message, err: true }));
-        });
-    }
+        }
+      } catch(error){
+        if(method === 'PUT') {
+          dispatch(setMsg({ msg: `Something went wrong when updating this inventory. Please try again later.`, err: true }));
+        } else {
+          dispatch(setMsg({ msg: 'Something went wrong when trying to add Inventory. Please try again later!', err: true }));
+        }
+      }
     setShowForm(false);
   };
 
@@ -212,7 +205,7 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
               id="fear"
               autoComplete="off"
               onChange={() => checkboxChange(0)}
-              isChecked={ isChecked[0].checked }
+              checked={ isChecked[0].checked }
             />
             <label htmlFor="fear" className="inventory__form-label-checkbox">
               Fear
@@ -293,7 +286,7 @@ const InventoryForm = ({ who, why, fear, selfEsteem, security, personalRelations
           </div>
           <div className="inventory__form-group">
             <div className="form-floating">
-            <textarea className="form-control" placeholder="Where have I been selfish, dishonest, or afraid?" id="myPart" name="myPart" style={{'height':'125px'}} onChange={ handleChange }></textarea>
+            <textarea className="form-control" placeholder="Where have I been selfish, dishonest, or afraid?" id="myPart" name="myPart" style={{'height':'125px'}} onChange={ handleChange } value={ formData.myPart }></textarea>
             <label htmlFor="myPart">Where have I been selfish, dishonest, or afraid?</label>
             </div>
           </div>

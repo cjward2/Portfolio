@@ -1,4 +1,3 @@
-import React from 'react'
 import SoberDate from '../SoberDate'
 import DailyReflection from '../DailyReflection'
 import './Dashboard.css';
