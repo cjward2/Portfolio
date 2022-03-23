@@ -5,6 +5,7 @@ import { selectMessage, setMsg } from '../../features/messageSlice';
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../features/userSlice";
 import { useHistory } from "react-router-dom";
+import requireAuth from '../requireAuth';
 import { makeRequest } from '../../util';
 
 import './NightlyReviewDetail.css';
@@ -16,13 +17,7 @@ const NightlyReviewDetail = () => {
     const user = useSelector(selectUser);
     const params = useParams();  //I want the id from the route to pass into my endpoint
     const dispatch = useDispatch();
-    const history = useHistory();
     const message = useSelector(selectMessage);
-
-    if (user.id === undefined) { 
-        dispatch(setMsg({ msg: "Please login to view this page", err: true }));
-        history.push("/login");
-    }
 
     useEffect(() => {
         const getRequest = async () => {
@@ -30,15 +25,12 @@ const NightlyReviewDetail = () => {
                 const data = await makeRequest(`/api/review/${params.id}`);
                 setReview(data.review);
             } catch(error) {
-                if (user.id === undefined) { 
-                    dispatch(setMsg({ msg: "Please login to view this page", err: true }));
-                    history.push("/login");
-                } else {
-                    dispatch(setMsg({ msg: 'Something went wrong. Please try again later.', err: true }));
-                }
+                dispatch(setMsg({ msg: 'Something went wrong. Please try again later.', err: true }));
             }
         }
-        getRequest();
+        if(user.id !== undefined) {
+            getRequest();
+        }
     }, []);
 
     return (
@@ -143,4 +135,4 @@ const NightlyReviewDetail = () => {
     )
 }
 
-export default NightlyReviewDetail
+export default requireAuth(NightlyReviewDetail)

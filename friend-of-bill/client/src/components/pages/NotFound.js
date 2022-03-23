@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import requireAuth from '../requireAuth';
 
 const NotFound = () => {
   return (
@@ -12,4 +13,4 @@ const NotFound = () => {
   )
 }
 
-export default NotFound
+export default requireAuth(NotFound)

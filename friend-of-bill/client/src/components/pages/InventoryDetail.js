@@ -1,7 +1,9 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { selectUser } from "../../features/userSlice";
 import { selectMessage, setMsg } from '../../features/messageSlice';
 import { useDispatch, useSelector } from "react-redux";
+import requireAuth from '../requireAuth';
 import { makeRequest } from '../../util'; 
 
 import './InventoryDetail.css';
@@ -14,6 +16,7 @@ const InventoryDetail = () => {
 
     const dispatch = useDispatch();
     const message = useSelector(selectMessage);
+    const user = useSelector(selectUser);
 
     //Get id from route params to make call to backend for this specific id.
     const id = useParams();
@@ -26,7 +29,9 @@ const InventoryDetail = () => {
                 dispatch(setMsg({ msg: 'Something went wrong. Please try again later.', err: true }));
             }
         }
-        fetchRequest();       
+        if(user.id !== undefined) {
+            fetchRequest();   
+        }   
     }, []);
 
     if(edit) {
@@ -91,4 +96,4 @@ const InventoryDetail = () => {
     }
 }
 
-export default InventoryDetail;
+export default requireAuth(InventoryDetail);

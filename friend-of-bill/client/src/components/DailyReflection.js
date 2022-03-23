@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { setMsg } from '../features/messageSlice';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice";
 import { makeRequest } from '../util';
 import './DailyReflection.css';
 
@@ -14,6 +15,8 @@ const DailyReflection = () => {
 
     const [dailyReflection, setDailyReflection] = useState(dailyReflectionInitialState);
     const dispatch = useDispatch();
+    //Bring in user info from store
+    const user = useSelector(selectUser);
     //Run use Effect when component mounts
     useEffect(() => {
         const getRequest = async () => {
@@ -29,7 +32,9 @@ const DailyReflection = () => {
                 dispatch(setMsg({ msg: `Something went wrong when grabbing today's daily reflection. Please try again later.`, err: true }));
             }
         }
-        getRequest();
+        if(user.id !== undefined) {
+            getRequest();
+        }
     }, []);
 
     return (

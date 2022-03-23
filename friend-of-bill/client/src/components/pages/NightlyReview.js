@@ -4,7 +4,7 @@ import { selectUser } from "../../features/userSlice";
 import { useDispatch } from "react-redux";
 import { selectMessage, setMsg } from '../../features/messageSlice';
 import { Link } from 'react-router-dom';
-import { useHistory } from "react-router-dom";
+import requireAuth from "../requireAuth";
 import { makeRequest } from "../../util";
 
 import AlertMessage from "../AlertMessage";
@@ -20,13 +20,6 @@ const NightlyReview = () => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const message = useSelector(selectMessage);
-  const history = useHistory();
-
-  //if no user is logged in, redirect them back to login page
-  if (user.id === undefined) {
-    dispatch(setMsg({ msg: "Please login to view this page", err: true }));
-    history.push("/login");
-  }
 
   useEffect(() => {
     const getRequest = async () => {
@@ -39,7 +32,9 @@ const NightlyReview = () => {
         dispatch(setMsg({ msg: `Something went wrong while grabbing your nightly reviews. Please Try again later.`, err: true }))
       }
     }
-    getRequest();
+    if(user.id !== undefined) {
+      getRequest();
+    }
   }, []);
 
  const handleDelete = async id => {
@@ -77,4 +72,4 @@ const NightlyReview = () => {
 };
 
 
-export default NightlyReview;
+export default requireAuth(NightlyReview);

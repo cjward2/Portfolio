@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../features/userSlice";
 import { setInventory, selectInventory } from '../../features/inventorySlice'
 import { selectMessage, setMsg } from '../../features/messageSlice';
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import requireAuth from "../requireAuth";
 import { makeRequest } from '../../util';
 import "./Inventory.css";
 
@@ -19,15 +20,8 @@ const Inventory = () => {
   //Bring in user info from store
   const user = useSelector(selectUser);
   const inventory = useSelector(selectInventory);
-  const history = useHistory();
   const dispatch = useDispatch();
   const message = useSelector(selectMessage);
-
-  //if no user is logged in, redirect them back to login page
-  if (user.id === undefined) {
-    dispatch(setMsg({ msg: "Please login to view this page", err: true }));
-    history.push("/login");
-  }
 
   useEffect(() => {
       const getRequest = async () => {
@@ -40,7 +34,9 @@ const Inventory = () => {
           dispatch(setMsg({ msg: 'Something went wrong when grabbing your inventory. Please try again later.', err: true }));
         }
       }
-      getRequest();
+      if(user.id !== undefined) {
+        getRequest();
+      }
   }, []);
 
   const handleDelete = async id => {
@@ -84,4 +80,4 @@ const Inventory = () => {
   );
 };
 
-export default Inventory;
+export default requireAuth(Inventory);

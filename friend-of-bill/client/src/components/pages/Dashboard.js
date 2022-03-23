@@ -1,5 +1,6 @@
 import SoberDate from '../SoberDate'
-import DailyReflection from '../DailyReflection'
+import DailyReflection from '../DailyReflection';
+import requireAuth from '../requireAuth';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -11,4 +12,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard
+export default requireAuth(Dashboard)

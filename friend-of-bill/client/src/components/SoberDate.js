@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import { setMsg, selectMessage } from "../features/messageSlice";
-import { useHistory } from "react-router-dom";
 import { makeRequest } from "../../src/util";
+import requireAuth from "./requireAuth";
 
 import AlertMessage from "./AlertMessage";
 import "./SoberDate.css";
@@ -16,18 +16,10 @@ const SoberDate = () => {
 
   //Bring in user info from store
   const user = useSelector(selectUser);
-  const history = useHistory();
   const message = useSelector(selectMessage);
 
   const dispatch = useDispatch();
   //Run use Effect when component mounts
-
-  //Run this outside useEffect for slow internet speeds. for fast internet, useEffect fires with the request before redirect, which shows wrong message to user
-  if (user.id === undefined) { 
-    dispatch(setMsg({ msg: "Please login to view this page", err: true }));
-    history.push("/login");
-}
-
   useEffect(() => {
     const getRequest = async () => {
       try {
@@ -38,25 +30,17 @@ const SoberDate = () => {
             .substr(0, 16)
         );
       } catch (error) {
-        if (user.id === undefined) {
-          dispatch(setMsg({ msg: "Please login to view this page", err: true }));
-          history.push("/login");
-        } else {
           dispatch(setMsg({
             msg: "Something went wrong!!!. Please try again later.",
             err: true,
           })
         );
-        }
       }
     };
-    getRequest();
+    if(user.id !== undefined) {
+      getRequest();
+    }
   }, []);
-
-  if (user.id === undefined) {
-    dispatch(setMsg({ msg: "Please login to view this page", err: true }));
-    history.push("/login");
-  }
 
   const handleSubmit = async event => {
     //Prevent submissions of form from refreshing page
@@ -157,4 +141,4 @@ const SoberDate = () => {
   );
 };
 
-export default SoberDate;
+export default requireAuth(SoberDate);

@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { setMsg } from '../../features/messageSlice';
 import { selectUser } from "../../features/userSlice";
+import requireAuth from "../requireAuth";
 import { makeRequest } from "../../util";
 import './NightlyReviewForm.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,11 +13,6 @@ const NightlyReviewForm = () => {
   const history = useHistory();
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
-
-  if (user.id === undefined) { 
-    dispatch(setMsg({ msg: "Please login to view this page", err: true }));
-    history.push("/login");
-  }
 
     const initialFormState = {
         describe1: "",
@@ -94,7 +90,7 @@ const NightlyReviewForm = () => {
         history.push(`/review/${data.review._id}`);
       } catch(error) {
         dispatch(setMsg({ msg: 'Something went wrong when saving your review. Please try again later.', err: true }));
-        //If something goews wrong set the message in the store and display on redirect for user
+        //If something goes wrong set the message in the store and display on redirect for user
         history.push('/reviews');
       }
     }
@@ -250,4 +246,4 @@ const NightlyReviewForm = () => {
   );
 };
 
-export default NightlyReviewForm;
+export default requireAuth(NightlyReviewForm);
