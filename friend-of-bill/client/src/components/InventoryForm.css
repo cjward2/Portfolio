@@ -61,7 +61,7 @@ textarea#myPart {
 .inventory__form-input:focus {
   outline: none;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  border-bottom: 3px solid #55c57a;
+  border-bottom: 3px solid var(--primary-green);
 }
 
 .inventory__form-input:focus:invalid {
@@ -100,11 +100,11 @@ textarea#myPart {
   padding: 8px 18px;
   font-size: 14px;
   margin-left: 15px;
-  background-color: red;
+  background-color: var(--primary-red);
 }
 
 .red--btn::after {
-  background-color: red;
+  background-color: var(--primary-red);
 }
 
 .inventory__affects-my {
@@ -120,7 +120,7 @@ textarea#myPart {
 }
 
 .inventory__form-group input[type="checkbox"] {
-  accent-color: rgba(129, 40, 180);
+  accent-color: var(--primary-green);
 }
 
 @media only screen and (max-width: 1200px) {

@@ -87,8 +87,11 @@
   transition: all 0.2s;
 }
 
-.login__register-link:hover {
-  transform: translateY(-2px) scale(1.1);
+/*** HOVERS ***/
+@media (hover: hover) {
+  .login__register-link:hover {
+    transform: translateY(-2px) scale(1.1);
+  }
 }
 
 .login__register-link:focus {
@@ -133,12 +136,9 @@
   .login__form-input {
     width: 100%;
   }
-  
+
   .login__form {
     width: 100%;
     padding: 30px;
   }
 }
-
-
-

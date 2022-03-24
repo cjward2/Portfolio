@@ -37,8 +37,11 @@ a.nightly-review-link.custom-btn.btn--green {
   color: #fff;
 }
 
-.nightly-review-link:hover {
-  color: #fff;
+/*** HOVERS ***/
+@media (hover: hover) {
+  .nightly-review-link:hover {
+    color: #fff;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -47,12 +50,12 @@ a.nightly-review-link.custom-btn.btn--green {
     margin: 0 auto;
     max-width: 119px;
     margin-top: 100px;
-}
+  }
 }
 
 @media only screen and (max-width: 326px) {
   .nightlyReview__card {
     width: 95%;
     min-width: unset;
-}
+  }
 }

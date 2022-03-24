@@ -32,12 +32,15 @@
 .inventory__detail-link:link,
 .inventory__detail-link:visited {
   text-decoration: none;
-  color: #55c57a;
+  color: var(--primary-green);
   transition: all 0.2s;
 }
 
-.inventory__detail-link:hover {
-  transform: translateY(-2px) scale(1.05);
+/*** HOVERS ***/
+@media (hover: hover) {
+  .inventory__detail-link:hover {
+    transform: translateY(-2px) scale(1.05);
+  }
 }
 
 .inventory__form-group > button.red--btn.btn--green.landing__btn {

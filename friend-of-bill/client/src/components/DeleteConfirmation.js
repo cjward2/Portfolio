@@ -10,8 +10,8 @@ const DeleteConfirmation = ({ modalVisible, showHideDeleteModal, id, handleDelet
       <span onClick={ () => showHideDeleteModal() } className="modal-close-btn">x</span>
     </ModalHeader>
     <ModalBody>
-      <button className='custom-btn btn--green' onClick={ () => handleDelete(id) }>Confirm</button>
-      <button className='red--btn custom-btn' onClick={ () => showHideDeleteModal() }>Cancel</button>
+    <button className='custom-btn btn--green' onClick={ () => handleDelete(id) }>Confirm</button>
+    <button className='red--btn custom-btn' onClick={ () => showHideDeleteModal() }>Cancel</button> 
     </ModalBody>
   </Modal>, document.querySelector('body')
   );

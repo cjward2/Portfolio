@@ -3,6 +3,10 @@
     text-transform: capitalize;
 }
 
+.soberDate {
+    padding-top: 10px;
+}
+
 .soberDate__enter-date {
     display: flex;
     flex-direction: column;

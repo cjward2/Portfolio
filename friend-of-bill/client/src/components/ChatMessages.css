@@ -1,0 +1,24 @@
+.chat-message {
+    border-bottom: 1px solid rgb(206, 206, 206);
+    padding: 15px 25px;
+    font-family: 'Lato', sans-serif;
+    display: flex;
+}
+
+.chat-message--img {
+    margin-right: 15px;
+}
+
+.chat-message--img > img {
+    height: 65px;
+    width: 65px;
+    border-radius: 50%;
+}
+
+.chat-message:last-child {
+    margin-bottom: 70px;
+}
+
+.chat-message__user {
+    font-weight: 600;
+}

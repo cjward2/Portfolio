@@ -24,14 +24,17 @@
 .nightly-review-link:link,
 .nightly-review-link:visited {
   text-decoration: none;
-  color: #55c57a;
+  color: var(--primary-green);
   font-size: 18px;
   display: inline-block;
   transition: all 0.2s;
 }
 
-.nightly-review-link:hover {
-  transform: translateY(-2px) scale(1.1);
+/*** HOVERS ***/
+@media (hover: hover) {
+  .nightly-review-link:hover {
+    transform: translateY(-2px) scale(1.1);
+  }
 }
 
 .nightly-review-link:focus {

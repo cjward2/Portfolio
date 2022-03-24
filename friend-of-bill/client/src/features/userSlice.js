@@ -4,7 +4,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState: {
     //Store user ID in session storage to persist across refreshes. For users security, going with session storage so data doesn't persist afteer session is ended
-    user: {id: window.sessionStorage.userID, name: window.sessionStorage.name}
+    user: {id: window.sessionStorage.userID, name: window.sessionStorage.name, profilePic: window.sessionStorage.img }
   },
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {

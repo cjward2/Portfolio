@@ -6,6 +6,15 @@
   box-sizing: inherit;
 }
 
+:root {
+  --nav-background-color-primary: #4fe3c1;
+  --nav-background-color-secondary: #0ebbf4;
+  --landing-color-primary: #4fe3c0bd;
+  --landing-color-secondary: #0ebbf4bd;
+  --primary-green: #55c57a;
+  --primary-red: red;
+}
+
 body,
 html {
   /* best practice, but doesn't make huge difference */
@@ -46,6 +55,8 @@ body {
   color: #000;
 }
 
+/*** HOVERS ***/
+@media (hover: hover) {
 .custom-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -56,7 +67,7 @@ body {
   transform: scaleX(1.4) scaleY(1.6);
   opacity: 0;
 }
-
+}
 .custom-btn::after {
   content: "";
   display: inline-block;
@@ -74,14 +85,14 @@ body {
 
 /* Green Button */
 .btn--green {
-  background: #55c57a;
+  background: var(--primary-green);
   color: #fff;
   padding: 8px 18px;
   font-size: 14px;
 }
 
 .btn--green::after {
-  background-color: #55c57a;
+  background-color: var(--primary-green);
 }
 
 /* Red Button */
@@ -89,12 +100,12 @@ body {
   border: none;
   padding: 8px 18px;
   border-radius: 100px;
-  background: red;
+  background: var(--primary-red);
   color: #fff;
   display: inline-block;
   margin-top: 45px;
 }
 
 .btn--red::after {
-  background: red;
+  background: var(--primary-red);
 }

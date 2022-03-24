@@ -30,6 +30,7 @@ const Login = () => {
                 //Store users info in session storage so state can persist across refresh
                 window.sessionStorage.userID = data.userID;
                 window.sessionStorage.name = data.name;
+                window.sessionStorage.img = null;
                 dispatch(login({ id: data.userID, name: data.name }));
                 history.push('/dashboard');
             } catch(error) {

@@ -23,7 +23,7 @@
   position: fixed;
   top: 65px;
   right: 65px;
-  background-image: radial-gradient(rgba(142, 111, 213), rgba(129, 40, 180));
+  background-image: radial-gradient(var(--nav-background-color-primary), var(--nav-background-color-secondary));
   z-index: 15;
   transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
 }
@@ -78,11 +78,22 @@
   display: inline-block;
 }
 
-.navigation__link:hover,
-.navigation__link:active {
-  background-position: 100%;
-  color: rgba(129, 40, 180);
-  transform: translateX(10px);
+/*** HOVERS ***/
+@media (hover: hover) {
+  .navigation__link:hover,
+  .navigation__link:active {
+    background-position: 100%;
+    color: var(--nav-background-color-secondary);
+    transform: translateX(10px);
+  }
+
+  .navigation__button:hover .navigation__icon::before {
+    top: -10px;
+  }
+  
+  .navigation__button:hover .navigation__icon::after {
+    top: 10px;
+  }
 }
 
 .navigation__checkbox:checked ~ .navigation__background {
@@ -123,14 +134,6 @@
 
 .navigation__icon::after {
   top: 8px;
-}
-
-.navigation__button:hover .navigation__icon::before {
-  top: -10px;
-}
-
-.navigation__button:hover .navigation__icon::after {
-  top: 10px;
 }
 
 .navigation__checkbox:checked + .navigation__button .navigation__icon {

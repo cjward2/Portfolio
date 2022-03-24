@@ -2,8 +2,8 @@
   height: 95vh;
   background-image: linear-gradient(
       to right bottom,
-      rgba(142, 111, 213, 0.8),
-      rgba(129, 40, 180, 0.8)
+      #4fe3c0bd,
+      #0ebbf4bd
     ),
     url("../../assets/img/landing-page-background.jpg");
   background-size: cover;

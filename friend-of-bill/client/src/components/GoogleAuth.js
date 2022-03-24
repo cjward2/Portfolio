@@ -21,7 +21,8 @@ const GoogleAuth = () => {
             const data = await makeRequest('/api/google/auth', 'POST', { body: JSON.stringify(response.profileObj) });
             window.sessionStorage.userID = data._id;
             window.sessionStorage.name = data.name;
-            dispatch(login({ id: data._id, name: data.name }));
+            window.sessionStorage.img = data.googleImg;
+            dispatch(login({ id: data._id, name: data.name, profilePic: data.googleImg  }));
             history.push('/dashboard');
         } catch(error) {
             dispatch(setMsg({ msg: 'Something went wrong when try to login. Please try again later.', err: true }));
