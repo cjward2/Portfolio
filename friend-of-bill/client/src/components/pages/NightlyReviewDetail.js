@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { selectMessage, setMsg } from '../../features/messageSlice';
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../features/userSlice";
-import { useHistory } from "react-router-dom";
 import requireAuth from '../requireAuth';
 import { makeRequest } from '../../util';
 

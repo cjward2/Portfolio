@@ -13,6 +13,7 @@
   --landing-color-secondary: #0ebbf4bd;
   --primary-green: #55c57a;
   --primary-red: red;
+  --box-shadow: 0 15px 4px rgba(0, 0, 0, 0.15);
 }
 
 body,

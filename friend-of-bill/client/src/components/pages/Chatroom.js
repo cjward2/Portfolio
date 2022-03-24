@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { selectUser } from "../../features/userSlice";
+import { selectMessage, setMsg } from '../../features/messageSlice';
+import { useDispatch, useSelector } from "react-redux";
 import io from 'socket.io-client';
 import { makeRequest } from "../../util";
 import requireAuth from "../requireAuth";
 import ChatMessages from "../ChatMessages";
+import AlertMessage from '../AlertMessage';
 import './Chatroom.css';
 
 //Initialize socket
@@ -15,7 +17,8 @@ const Chatroom = () => {
   const [messageList, setMessageList] = useState([]);
 
   const user = useSelector(selectUser);
-  console.log(user);
+  const dispatch = useDispatch();
+  const errorMessage = useSelector(selectMessage);
 
   useEffect(() => {
     const getRequest = async () => {
@@ -24,7 +27,7 @@ const Chatroom = () => {
         setMessageList(data);
         scrollToBottom('.chatroom__container');
       } catch(error) {
-        console.log(error);
+        dispatch(setMsg({ msg: 'Something went wrong loading messages. Please try again later.', err: true }))
       }
     }
     if(user.id !== undefined) {
@@ -34,17 +37,17 @@ const Chatroom = () => {
   
   useEffect(() => {
     //Listen for connection
-    socket.on('connect', () => console.log(`Client connected: ${socket.id}`));
+    //socket.on('connect', () => console.log(`Client connected: ${socket.id}`));
    
     //Listen for disconnect
-    socket.on('disconnect', (reason) =>
-      console.log(`Client disconnected: ${reason}`)
-    );
+    // socket.on('disconnect', (reason) =>
+    //   console.log(`Client disconnected: ${reason}`)
+    // );
 
     //Listen for connection error
-    socket.on('connect_error', (reason) =>
-      console.log(`Client connect_error: ${reason}`)
-    );
+    socket.on('connect_error', (reason) => 
+      dispatch(setMsg({ msg: 'Something went wrong. Please try again later.', err: true }))
+    )
 
     socket.on('receive_message', (data) => {
       setMessageList([...messageList, {message: data.message, user: data.user, img: data.profilePic}]);
@@ -73,6 +76,7 @@ const Chatroom = () => {
 
   return (
     <div className="chatroom">
+      { errorMessage && <AlertMessage marginTop/> }
     <div className="chatroom__content">
     <h1 className="chatroom__container--heading">
       Chatroom
