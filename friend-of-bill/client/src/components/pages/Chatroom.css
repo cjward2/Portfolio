@@ -22,6 +22,7 @@
   padding: 0px 50px;
   overflow-y: scroll;
   width: 75%;
+  min-width: 445px;
   margin: 0 auto;
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -56,6 +57,7 @@ h1.chatroom__container--heading {
   padding: 10px;
   letter-spacing: 1.5px;
   font-family: "Lato", sans-serif;
+  min-width: 445px;
 }
 
 form.chatroom__form {
@@ -90,4 +92,22 @@ button.chatroom__form--btn.btn--green.custom-btn {
   position: absolute;
   top: 2px;
   right: 5px;
+}
+
+@media only screen and (max-width: 458px) {
+  form.chatroom__form {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 445px) {
+  h1.chatroom__container--heading,
+  .chatroom__container {
+    width: 95%;
+    min-width: unset;
+  }
+
+  .chat-message {
+    padding: 15px 0;
+  }
 }

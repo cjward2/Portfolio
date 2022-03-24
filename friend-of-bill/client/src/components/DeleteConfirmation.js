@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './DeleteConfirmation.css'
 
 const DeleteConfirmation = ({ modalVisible, showHideDeleteModal, id, handleDelete }) => {
+  //Use a portal to semantically place modal in DOM.
   return ReactDOM.createPortal(
     <Modal isOpen={ modalVisible } toggle={ () => showHideDeleteModal() }>
     <ModalHeader>

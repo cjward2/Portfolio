@@ -36,6 +36,7 @@ const Chatroom = () => {
   }, [])
   
   useEffect(() => {
+    //Debugging
     //Listen for connection
     //socket.on('connect', () => console.log(`Client connected: ${socket.id}`));
    
