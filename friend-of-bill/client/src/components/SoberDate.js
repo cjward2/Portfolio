@@ -24,6 +24,10 @@ const SoberDate = () => {
     const getRequest = async () => {
       try {
         const data = await makeRequest(`/api/soberdate/${user.id}`);
+        //In the event a user is first logging into app and hasnt set sober date, dont trigger an error. data.soberDate.date would be undefined, triggering an error. Checking for existence of soberdate and if there are none, just return from the function.
+        if(data.soberDate.length === 0) {
+          return;
+        }
         setSoberDate(
           new Date(data.soberDate[data.soberDate.length - 1].date)
             .toUTCString()
@@ -35,6 +39,7 @@ const SoberDate = () => {
             err: true,
           })
         );
+        console.log(error)
       }
     };
     if(user.id !== undefined) {

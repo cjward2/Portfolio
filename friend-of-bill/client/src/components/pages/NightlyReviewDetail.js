@@ -31,6 +31,8 @@ const NightlyReviewDetail = () => {
         if(user.id !== undefined) {
             getRequest();
         }
+        //When this compoonent renders, i always want to user to see the top of the page
+        window.scrollTo(0, 0);
     }, []);
 
     return (
