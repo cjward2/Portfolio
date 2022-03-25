@@ -1,0 +1,42 @@
+.not-found {
+  display: flex;
+  height: 95vh;
+  align-items: center;
+  justify-content: center;
+  font-family: "Lato", sans-serif;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.9)
+    ),
+    url("../../assets/img/landing-page-background.jpg");
+}
+
+.not-found__content {
+    text-align: center;
+    padding: 10px;
+}
+
+h1.not-found__title {
+  font-size: 56px;
+  letter-spacing: 1.5px;
+  font-weight: 300;
+}
+
+p.not-found__desc {
+  font-size: 18px;
+}
+
+.not-found__desc--link,
+.not-found__desc--link:link,
+.not-found__desc--link:visited {
+  text-decoration: none;
+  color: var(--primary-green);
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 600px) {
+    .not-found {
+        height: 100vh;
+    }
+}
