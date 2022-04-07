@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
@@ -6,18 +6,20 @@ import "./App.css";
 
 //Component imports
 import Landing from "./components/pages/Landing";
-import Login from "./components/pages/Login";
-import Register from "./components/pages/Register";
-import Dashboard from "./components/pages/Dashboard";
-import Inventory from "./components/pages/Inventory";
 import Navbar from './components/Navbar';
-import NightlyReview from "./components/pages/NightlyReview";
-import InventoryDetail from "./components/pages/InventoryDetail";
-import NightlyReviewForm from "./components/pages/NightlyReviewForm";
-import NightlyReviewDetail from "./components/pages/NightlyReviewDetail";
-import OnAwakening from "./components/pages/OnAwakening";
-import Chatroom from "./components/pages/Chatroom";
 import NotFound from "./components/pages/NotFound";
+
+//Lazy loading for route based code splitting
+const Login = React.lazy(() => import('./components/pages/Login'));
+const Register = React.lazy(() => import('./components/pages/Register'));
+const Dashboard = React.lazy(() => import('./components/pages/Dashboard'));
+const Inventory = React.lazy(() => import('./components/pages/Inventory'));
+const NightlyReview = React.lazy(() => import('./components/pages/NightlyReview'));
+const InventoryDetail = React.lazy(() => import('./components/pages/InventoryDetail'));
+const NightlyReviewForm = React.lazy(() => import('./components/pages/NightlyReviewForm'));
+const NightlyReviewDetail = React.lazy(() => import('./components/pages/NightlyReviewDetail'));
+const OnAwakening = React.lazy(() => import('./components/pages/OnAwakening'));
+const Chatroom = React.lazy(() => import('./components/pages/Chatroom'));
 
 function App() {
   //Bring in user state from store
@@ -27,6 +29,7 @@ function App() {
     <Router>
       {/* Only show nav bar when user is logged in */}
       { user.id !== undefined  && <Navbar /> }
+      <Suspense fallback={<div class="lds-ring"><div></div><div></div><div></div><div></div></div>}>
       <Switch>
         <Route exact path="/">
           <Landing />
@@ -65,6 +68,7 @@ function App() {
           <NotFound />
         </Route>
       </Switch>
+      </Suspense>
     </Router>
   );
 }
