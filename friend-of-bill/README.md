@@ -20,6 +20,7 @@ You can find a live version of this build [**Here**](https://friend-of-bill-v2.h
 - Fully Responsive Front-end.
 - Backend built using REST API conventions
 - Web Scraping with Cheerio and Request modules.
+- Lazy Loading for route based code splitting
 
 ## Technologies
 - React.js
