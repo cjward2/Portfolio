@@ -14,6 +14,8 @@ export default function Home() {
       <section id="hero" className="snap-center">
         <Hero />
       </section>
+
+      {/* ABout ME */}
     </div>
   );
 }
